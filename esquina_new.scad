@@ -5,7 +5,7 @@
 // GNU GPL v3
 // Josef Průša <iam@josefprusa.cz> and contributors
 // http://www.reprap.org/wiki/Prusa_Mendel
-// http://prusamendel.org
+// http://prusamendel.org 
 
 include <config.scad>
 
