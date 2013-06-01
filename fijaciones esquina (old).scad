@@ -3,7 +3,7 @@
 // GNU GPL v3
 // Chema Muñoz (josema@pentabyte.es)
 
-include <config.scad>
+include <inc/config.scad>
 
 // *************** Esquina *************************
 

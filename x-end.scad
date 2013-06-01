@@ -6,8 +6,8 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-include <config.scad>
-use <bearing.scad>
+include <inc/config.scad>
+use <inc/bearing.scad>
 
 impresion=false; //para posicionar...
 x_end_largo=55;

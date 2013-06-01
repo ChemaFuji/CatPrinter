@@ -7,7 +7,7 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
  
-include <config.scad>
+include <inc/config.scad>
 
 module z_bottom_base(){
  translate([0,0,0]) cube([8,40,16+25-1]); // plate touching the base

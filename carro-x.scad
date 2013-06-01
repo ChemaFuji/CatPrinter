@@ -3,8 +3,8 @@
 // X carriage prototype
 // GNU GPL v3
 
-include <config.scad>
-use <bearing.scad>
+include <inc/config.scad>
+use <inc/bearing.scad>
 
 impresion=true; //para posicionar...
 

@@ -3,7 +3,7 @@
 // fijaciones x-end prototype
 // GNU GPL v3
 
-include <config.scad>
+include <inc/config.scad>
 
 module fija_shaft(par=true){
 	translate([0,0,12]) rotate([-90,180,0]) difference(){
