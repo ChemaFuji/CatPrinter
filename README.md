@@ -17,10 +17,3 @@ Chema
 [1]: http://flattr.com/thing/1403970/Chema-open-designs
 [2]: http://api.flattr.com/button/button-static-50x60.png
 
------
-
-[![Donate Paypal][2]][1]
-
-[1]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFJK5YHDT7BUC
-[2]: https://www.paypalobjects.com/es_ES/i/scr/pixel.gif
-
