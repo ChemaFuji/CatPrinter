@@ -2,41 +2,38 @@
 
 // X end prototype
 // GNU GPL v3
-// Josef Průša <iam@josefprusa.cz> and contributors
-// http://www.reprap.org/wiki/Prusa_Mendel
-// http://prusamendel.org
+
 
 include <inc/config.scad>
 use <inc/bearing.scad>
 
 impresion=false; //para posicionar...
-x_end_largo=55;
+altura_bearing=5;
 
 module x_end_base(){
 	// Bloque principal
-	translate(v=[-x_end_alto,-x_end_ancho+bearing_size/2,0]) cube(size = [x_end_alto,x_end_ancho,x_end_largo], center = false);
+	translate([-x_end_alto,-x_end_ancho+bearing_size/2,0]) 
+	 cube(size = [x_end_alto,x_end_ancho,x_end_largo], center = false);
 	// Bearing holder
-	//translate ([altura-2+grueso-x_end_alto,0,0]) soporte_bearing(largo=x_end_largo,ancho=altura-2+grueso-x_end_alto);	
-
-	translate ([altura-2+grueso-x_end_alto,0,0]) soporte_bearing(largo=x_end_largo,ancho=y_rod_distance/2);
-	translate ([-y_rod_distance+xc_ancho,0,0]) rotate([0,0,180]) soporte_bearing(largo=x_end_largo,ancho=y_rod_distance/2);
-
-	//translate ([-y_rod_distance,0,0]) rotate([0,0,180]) soporte_bearing(largo=x_end_largo,ancho=y_rod_distance-x_end_alto);	
-	//translate ([-y_rod_distance+xc_ancho,0,0]) rotate([0,0,180]) soporte_bearing(largo=x_end_largo,ancho=y_rod_distance-x_end_ancho);	
-
+	translate ([altura_bearing,0,0]) 
+	 soporte_bearing(largo=x_end_largo,ancho=y_rod_distance/2);
+//	translate ([-y_rod_distance+xc_ancho,0,0]) rotate([0,0,180]) 
+//	 soporte_bearing(largo=x_end_largo,ancho=y_rod_distance/2);
 }
 
 module x_end_holes(){
 	// Belt holes
-	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,10]) cube(size = [x_end_alto-grueso*2,30,22], center = true);
-	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,x_end_largo-10]) cube(size = [x_end_alto-grueso*2,30,22], center = true);
-	translate(v=[-x_end_alto/2,-x_end_ancho/2+12,x_end_largo/2]) cube(size = [x_end_alto-grueso*2,6,100], center = true);
+	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,10]) 
+	//cube(size = [x_end_alto-grueso*2,30,22], center = true);
+	 cube(size = [belt_ancho*1.5,30,22], center = true);
+	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,x_end_largo-10]) 
+	 cube(size = [belt_ancho*1.5,30,22], center = true);
+	translate(v=[-x_end_alto/2,-x_end_ancho/2+12,x_end_largo/2]) 
+	 cube(size = [belt_ancho*1.5,6,100], center = true);
 	
-	//screws poleas
-	//translate ([0,-15.5-12,10]) rotate ([0,-90,0]) 
+	//screws poleas 
 	translate ([0,-15.5-12,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 screw(r=m3_diameter/2, slant=false, head_drop=2, h=50);
-	//translate ([0,-15.5-12,x_end_largo-10]) rotate ([0,-90,0]) 
 	translate ([0,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 screw(r=m3_diameter/2, slant=false, head_drop=2, h=50);
 	
@@ -95,15 +92,23 @@ if(impresion){
 
 } else {
 
-	%translate([-x_end_alto,0,0]){
-	//translate ([-xc_ancho-grueso,0,-2]) cube([y_rod_distance,5,5]);
-	//translate ([grueso,-10,-2]) cube([altura-2,5,5]);
-	translate([altura-2+grueso,0,-100]) cylinder(r=4,h=200);
-	translate([altura-2+grueso-y_rod_distance,0,-100]) cylinder(r=4,h=200);
-	}
+//	%translate([-x_end_alto,0,0]){
+//	//translate ([-xc_ancho-grueso,0,-2]) cube([y_rod_distance,5,5]);
+//	//translate ([grueso,-10,-2]) cube([altura-2,5,5]);
+	%translate([altura_bearing,0,-100]) cylinder(r=4,h=200);
+	//translate([altura-2+grueso-y_rod_distance,0,-100]) cylinder(r=4,h=200);
+//	}
 	
-	translate ([-x_end_alto+grueso,-15.5-12,10]) rotate([0,-90,0]) #nema17(h=16,polea=12,shaft=false);
-	translate ([-x_end_alto+grueso,-15.5-12,x_end_largo-10]) rotate([0,-90,0]) #nema17(h=16,polea=12,shaft=false);
+	// poleas
+	translate ([-x_end_alto/2,-15.5-12,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	 polea(diam=12,alto=8);
+	translate ([-x_end_alto/2,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	 polea(diam=12,alto=8);
+//	translate ([-x_end_alto+grueso,-15.5-12,10]) rotate([0,-90,0]) 
+//	 //#nema17(h=16,polea=12,shaft=false);
+//	 polea();
+//	translate ([-x_end_alto+grueso,-15.5-12,x_end_largo-10]) rotate([0,-90,0]) 
+//	 #nema17(h=16,polea=12,shaft=false);
 	
 	translate([-3,-10,x_end_largo/2])
 	rotate([0,90,-90])
@@ -114,7 +119,7 @@ if(impresion){
 	
 	%translate([-3+16,-7,x_end_largo/2]) rotate ([90,0,0]){
 	cylinder(r=4,h=100);
-	translate([-x_rod_distance,0,0])
+	translate([-x_rod_distance+10,0,0])
 	cylinder(r=4,h=100);
 	
 	

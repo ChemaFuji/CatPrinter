@@ -57,6 +57,18 @@ module nema17(places=[1,1,1,1], size=15.5, h=10, holes=false, polea=false, shaft
 
 }
 
+module polea(diam=12,alto=9){
+	difference(){
+		union(){
+		 cylinder(r=diam/2,h=alto,center=true);
+		translate ([0,0,-alto/2]) cylinder(r=(diam/2)+2,h=1,center=true);
+		translate ([0,0,alto/2]) cylinder(r=(diam/2)+2,h=1,center=true);
+		}
+	cylinder(r=1.6,h=100,center=true);
+	}
+	
+}
+
 module nut(d,h,horizontal=true){
     cornerdiameter =  (d / 2) / cos (180 / 6);
     cylinder(h = h, r = cornerdiameter, $fn = 6);

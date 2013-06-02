@@ -17,8 +17,8 @@ bajos = 6;
 grueso=5+2;
 
 //x_end data y-carriage
-x_end_alto=33;
-x_end_largo=60;
+x_end_alto=33-10;
+x_end_largo=55;
 x_end_ancho=35+8;
 
 //altura polea respecto barra superior
@@ -27,7 +27,7 @@ x_end_ancho=35+8;
 //espacio para polea (altura) = 12-14mm
 
 //x_rod_distance = (altura-2+grueso-x_end_alto)*2; //29.25*2;
-x_rod_distance = 29.25*2;
+x_rod_distance = 29.25*2-10;
 y_rod_distance = 55;
 
 bearing_diameter = 10;
