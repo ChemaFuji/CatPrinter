@@ -93,8 +93,10 @@ module fija_correa(){
 module carro_x(){
 	//rail fijación correa
 	//cube([10,x_end_largo-20-12,10],center=true);
-	translate([-belt_ancho/2,-(x_end_largo-20-12)/2+grueso_fijacion,0])
-	cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
+	//translate([-belt_ancho/2,-(x_end_largo-20-12)/2+grueso_fijacion,0])
+	translate([-belt_ancho/2,-(40-12)/2+grueso_fijacion,0])
+	//cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
+	cube([belt_ancho,(40-12)/2-grueso_fijacion,xc_largo]);
 	
 	difference(){
 	carro_x_base();
@@ -106,11 +108,11 @@ carro_x();
 
 if (impresion){
 	//fijaciones
-	translate([-20,-20,0])
+	translate([-15,-18,0])
 	rotate([0,0,180])
 	fija_correa();
 
-	translate([20,-20,0])
+	translate([15,-18,0])
 	rotate([0,0,180])
 	fija_correa();
 
