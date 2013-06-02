@@ -57,16 +57,33 @@ module nema17(places=[1,1,1,1], size=15.5, h=10, holes=false, polea=false, shaft
 
 }
 
-module polea(diam=12,alto=9){
+module polea(diam=12,alto=9,imp=false){
+
+  if(imp){
+	difference(){
+		union(){
+		 cylinder(r=diam/2+0.3,h=alto/2,center=true);
+		translate ([0,0,-alto/4]) 
+		 cylinder(r=(diam/2)+2,h=1,center=true);
+//		translate ([0,0,alto/2]) 
+//		 cylinder(r=(diam/2)+2,h=1,center=true);
+		}
+	 translate ([0,0,alto/4-1.5])
+	 cylinder(r=623_od/2+0.3,h=alto/2,center=true);
+	 #cylinder(r=623_od/2-1,h=100,center=true);
+	}
+  }else{
 	difference(){
 		union(){
 		 cylinder(r=diam/2,h=alto,center=true);
-		translate ([0,0,-alto/2]) cylinder(r=(diam/2)+2,h=1,center=true);
-		translate ([0,0,alto/2]) cylinder(r=(diam/2)+2,h=1,center=true);
+		translate ([0,0,-alto/2]) 
+		 cylinder(r=(diam/2)+2,h=1,center=true);
+		translate ([0,0,alto/2]) 
+		 cylinder(r=(diam/2)+2,h=1,center=true);
 		}
-	cylinder(r=1.6,h=100,center=true);
+	 cylinder(r=1.6,h=100,center=true);
 	}
-	
+  }	
 }
 
 module nut(d,h,horizontal=true){
