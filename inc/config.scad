@@ -27,7 +27,8 @@ x_end_ancho=35+8;
 //espacio para polea (altura) = 12-14mm
 
 //x_rod_distance = (altura-2+grueso-x_end_alto)*2; //29.25*2;
-x_rod_distance = 29.25*2-10;
+//x_rod_distance = 29.25*2-10;
+x_rod_distance = 31+10; //x_end_alto+8;
 y_rod_distance = 55;
 
 bearing_diameter = 10;
