@@ -34,7 +34,9 @@ bearing_diameter = 10;
 thinwall = 2;
 bearing_size = bearing_diameter + 2 * thinwall;
 
-
+623_id=3;
+623_od=10;
+623_h=4;
 
 //x-carriage
 xc_alto=29.25;
