@@ -14,7 +14,7 @@ fondo = 22;
 ancho = 18;
 bajos = 6;
 
-grueso=5+2;
+grueso=5;
 
 //x_end data y-carriage
 x_end_alto=33-10;

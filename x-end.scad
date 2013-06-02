@@ -7,7 +7,7 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=false; //para posicionar...
+impresion=true; //para posicionar...
 altura_bearing=5;
 
 module x_end_base(){
@@ -25,30 +25,30 @@ module x_end_holes(){
 	// Belt holes
 	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,10]) 
 	//cube(size = [x_end_alto-grueso*2,30,22], center = true);
-	 cube(size = [belt_ancho*1.5,30,22], center = true);
+	 cube(size = [belt_ancho*2,30,22], center = true);
 	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,x_end_largo-10]) 
-	 cube(size = [belt_ancho*1.5,30,22], center = true);
+	 cube(size = [belt_ancho*2,30,22], center = true);
 	translate(v=[-x_end_alto/2,-x_end_ancho/2+12,x_end_largo/2]) 
-	 cube(size = [belt_ancho*1.5,6,100], center = true);
+	 cube(size = [belt_ancho*2,6,100], center = true);
 	
 	//screws poleas 
 	translate ([0,-15.5-12,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=2, h=50);
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=2, h=50, $fn=10);
 	translate ([0,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=2, h=50);
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=2, h=50, $fn=10);
 	
-	translate ([-35,-15.5-12,(x_end_largo-40)/2]) rotate ([180,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=4, h=50, $fn=6);
-	translate ([-35,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([180,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=4, h=50, $fn=6);
+	translate ([-x_end_alto-2,-15.5-12,(x_end_largo-40)/2]) rotate ([180,-90,0]) 
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4, h=50, $fn=6);
+	translate ([-x_end_alto-2,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([180,-90,0]) 
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4, h=50, $fn=6);
 
 	//screws fijaciones barras
 	translate ([50,-15+1,x_end_largo/2]) 
 	rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=0, h=150);
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=0, h=150);
 	translate ([50,-15+1-15,x_end_largo/2]) 
 	rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2, slant=false, head_drop=0, h=150);
+	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=0, h=150);
 
 }
 
@@ -63,9 +63,9 @@ module fija_shaft(par=true){
 		  translate([-15,-2,8])  cube([ancho*2,3.5,2]);
 		  // Tornillos
 		  translate([0,7,13]) 
-			rotate([180,0,0]) screw(r=m3_diameter/2,slant=false,head_drop=4,h=50, $fn=par?12:6);
+			rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?12:6);
 		  translate([0,7-15,13]) 
-			rotate([180,0,0]) screw(r=m3_diameter/2,slant=false,head_drop=4,h=50, $fn=par?6:12);
+			rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?6:12);
 		}
 	}
 
@@ -86,7 +86,7 @@ if(impresion){
 	translate([15,-15,-3])
 	rotate([90,0,0])
 	fija_shaft();
-	translate([-47,-15,-3])
+	translate([-47+10,-15,-3])
 	rotate([90,0,0])
 	fija_shaft(par=false);
 
@@ -119,7 +119,7 @@ if(impresion){
 	
 	%translate([-3+16,-7,x_end_largo/2]) rotate ([90,0,0]){
 	cylinder(r=4,h=100);
-	translate([-x_rod_distance+10,0,0])
+	translate([-x_rod_distance+0,0,0])
 	cylinder(r=4,h=100);
 	
 	
