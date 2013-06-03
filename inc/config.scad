@@ -41,7 +41,7 @@ bearing_size = bearing_diameter + 2 * thinwall;
 
 //x-carriage
 xc_alto=29.25;
-xc_largo=90;
+xc_largo=90-50;
 xc_ancho=altura-2+grueso-x_end_alto;
 
 
