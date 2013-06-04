@@ -1,6 +1,6 @@
 // New printer MOD by Chema
 
-// X end prototype
+// Y carriage prototype
 // GNU GPL v3
 
 

@@ -27,13 +27,16 @@ module carro_x_base(){
 	//rail fijación correa
 	//cube([10,x_end_largo-20-12,10],center=true);
 	//translate([-belt_ancho/2,-(x_end_largo-20-12)/2+grueso_fijacion,0])
-	translate([-belt_ancho*1.5/2,-(40-12)/2+grueso_fijacion,0])
+	translate([-belt_ancho*3/2,-(40-12)/2+grueso_fijacion,0])
 	//cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
-	cube([belt_ancho*1.5,(40-12)/2-grueso_fijacion,9.3-5]);
+	//cube([belt_ancho*1.5,(40-12)/2-grueso_fijacion,9.3-5]);
+	cube([belt_ancho*3,(40-12)/2-grueso_fijacion,xc_largo]);
 
-	translate([-belt_ancho*1.5/2,-(40-12)/2+grueso_fijacion,xc_largo-9.3+5])
-	//cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
-	cube([belt_ancho*1.5,(40-12)/2-grueso_fijacion,9.3-5]);
+
+
+//	translate([-belt_ancho*1.5/2,-(40-12)/2+grueso_fijacion,xc_largo-9.3+5])
+//	//cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
+//	cube([belt_ancho*1.5,(40-12)/2-grueso_fijacion,9.3-5]);
 
 }
 
