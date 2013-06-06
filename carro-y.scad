@@ -45,6 +45,16 @@ module x_end_holes(){
 	 cube(size = [x_end_alto-4,20,22], center = true);
 
 
+		  // Brida verticales
+		  translate([-x_end_ancho/2+10,-x_end_alto-6,x_end_largo/2-5])  
+			cube([x_end_ancho*2,3.5,2], center=true);
+		  translate([-x_end_ancho/2+10,-x_end_alto-6,x_end_largo/2+5])  
+			cube([x_end_ancho*2,3.5,2], center=true);
+		  //Horizontal
+		  translate([-x_end_ancho/2+10,-x_end_alto-6,x_end_largo/2+(impresion?15.3:0)])
+			rotate([0,90,0])  
+			cube([x_end_ancho,5,4], center=true);
+
 	
 	//screws poleas 
 	translate ([0,-28.5,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
@@ -75,7 +85,18 @@ module fija_shaft(par=true){
 		  // Hueco para barra lisa
 		  translate([0,-100,10+6-4]) rotate([0,90,90]) cylinder(h = 230, r=4.2, $fn=30); 
 		  // Brida
-		  //translate([-15,-2,8])  cube([ancho*2,3.5,2]);
+		  translate([-ancho*1.5,5,9])  cube([ancho*3,3.5,20]);
+
+		  // Brida verticales
+			rotate([0,90,0]){
+		  translate([-x_end_ancho/2,7,0]){ 
+			translate([0,0,-5]) 
+			cube([x_end_ancho*2,3.5,2], center=true);
+		  //%translate([-x_end_ancho/2+10,-x_end_alto-6,x_end_largo/2+5])  
+			translate([0,0,5])
+			cube([x_end_ancho*2,3.5,2], center=true);
+			}}
+
 		  // Tornillos
 //		  translate([0,7,13]) 
 //			%rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?12:6);
@@ -114,7 +135,7 @@ if(impresion){
 } else {
 
 	//barra eje Y
-	%translate([altura_bearing,0,-100]) cylinder(r=4,h=200);
+	#translate([altura_bearing,0,-100]) cylinder(r=4,h=200);
 
 	
 	// poleas
@@ -132,7 +153,7 @@ if(impresion){
 
 	//barras eje X	
 	//%translate([-3+16,-7,x_end_largo/2]) rotate ([90,0,0]){
-	%translate([4+5+0.5,-7,x_end_largo/2]) rotate ([90,0,0]){
+	#translate([4+5+0.5,-7,x_end_largo/2]) rotate ([90,0,0]){
 	cylinder(r=4,h=100);
 	translate([-x_rod_distance+0,0,0])
 	cylinder(r=4,h=100);
