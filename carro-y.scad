@@ -12,8 +12,11 @@ altura_bearing=5;
 
 module x_end_base(){
 	// Bloque principal
-	translate([-x_end_alto,-x_end_ancho+bearing_size/2,0]) 
-	 cube(size = [x_end_alto,x_end_ancho,x_end_largo], center = false);
+//	translate([-x_end_alto,-x_end_ancho+bearing_size/2,0]) 
+//	 cube(size = [x_end_alto,x_end_ancho,x_end_largo], center = false);
+	translate([-x_end_alto+0.5,-x_end_ancho+7.25,0]) 
+	 cube(size = [x_end_alto,x_end_ancho-13.5,x_end_largo], center = false);
+
 	// Bearing holder
 	translate ([altura_bearing,0,0]) 
 	 soporte_bearing(largo=x_end_largo,ancho=y_rod_distance/2);
@@ -22,24 +25,36 @@ module x_end_base(){
 }
 
 module x_end_holes(){
-	// Belt holes
+	
+		//huecos para poleas
 	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,10]) 
 	//cube(size = [x_end_alto-grueso*2,30,22], center = true);
 	 cube(size = [belt_ancho*2,30,22], center = true);
 	translate(v=[-x_end_alto/2,-x_end_ancho/2-4,x_end_largo-10]) 
 	 cube(size = [belt_ancho*2,30,22], center = true);
-	translate(v=[-x_end_alto/2,-x_end_ancho/2+12,x_end_largo/2]) 
+		//paso a través de la correa
+	translate(v=[-x_end_alto/2,-x_end_ancho/2+11.5,x_end_largo/2]) 
 	 cube(size = [belt_ancho*2,6,100], center = true);
+		//mejora acceso, gasto de plástico
+	translate(v=[-x_end_alto/2,-x_end_ancho/2+8.5,x_end_largo-10+2]) 
+	 cube(size = [x_end_alto+1,12,22], center = true);
+	translate(v=[-x_end_alto/2,-x_end_ancho/2+8.5,8]) 
+	 cube(size = [x_end_alto+1,12,22], center = true);
+		//mejora tamaño impresión
+	translate(v=[-x_end_alto/2-3,-x_end_ancho/2+22,x_end_largo-10+2]) 
+	 cube(size = [x_end_alto-4,20,22], center = true);
+
+
 	
 	//screws poleas 
-	translate ([0,-15.5-12,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	translate ([0,-28.5,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=2, h=50, $fn=10);
-	translate ([0,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	translate ([0,-28.5,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=2, h=50, $fn=10);
 	
-	translate ([-x_end_alto-2,-15.5-12,(x_end_largo-40)/2]) rotate ([180,-90,0]) 
+	translate ([-x_end_alto-2,-28.5,(x_end_largo-40)/2]) rotate ([180,-90,0]) 
 	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4, h=50, $fn=6);
-	translate ([-x_end_alto-2,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([180,-90,0]) 
+	translate ([-x_end_alto-2,-28.5,x_end_largo-(x_end_largo-40)/2]) rotate ([180,-90,0]) 
 	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4, h=50, $fn=6);
 
 	//screws fijaciones barras
@@ -54,18 +69,20 @@ module x_end_holes(){
 
 module fija_shaft(par=true){
 	translate([0,0,12]) rotate([-90,180,0]) difference(){
-		translate([0,0,10]) 
-	 	 cube_fillet([18,25+4,14], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
+		translate([0,0,10-1]) 
+	 	 cube_fillet([18,25+4,14-2], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
 		translate([0,0,0]){
 		  // Hueco para barra lisa
-		  translate([0,-100,10+6]) rotate([0,90,90]) cylinder(h = 230, r=4.2, $fn=30); 
+		  translate([0,-100,10+6-4]) rotate([0,90,90]) cylinder(h = 230, r=4.2, $fn=30); 
 		  // Brida
-		  translate([-15,-2,8])  cube([ancho*2,3.5,2]);
+		  //translate([-15,-2,8])  cube([ancho*2,3.5,2]);
 		  // Tornillos
-		  translate([0,7,13]) 
-			rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?12:6);
+//		  translate([0,7,13]) 
+//			%rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?12:6);
 		  translate([0,7-15,13]) 
-			rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?6:12);
+			rotate([180,0,0]) 
+			//screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?6:12);
+			cylinder(r=m3_diameter/2+0.1,h=50,$fn=12);
 		}
 	}
 
@@ -83,41 +100,39 @@ x_end_plain();
 
 if(impresion){
 
-//	translate([15,-15,-3])
-//	rotate([90,0,0])
-//	fija_shaft();
-//	translate([-47+10,-15,-3])
-//	rotate([90,0,0])
-//	fija_shaft(par=false);
+	mirror([0,1,0])
+	//rotate([0,0,180])
+	translate([30,50,0])
+	x_end_plain();
+	translate([20,0,-3])
+	rotate([90,0,90])
+	fija_shaft();
+	translate([-26,-50,-3])
+	rotate([90,0,90])
+	fija_shaft(par=false);
 
 } else {
 
-//	%translate([-x_end_alto,0,0]){
-//	//translate ([-xc_ancho-grueso,0,-2]) cube([y_rod_distance,5,5]);
-//	//translate ([grueso,-10,-2]) cube([altura-2,5,5]);
+	//barra eje Y
 	%translate([altura_bearing,0,-100]) cylinder(r=4,h=200);
-	//translate([altura-2+grueso-y_rod_distance,0,-100]) cylinder(r=4,h=200);
-//	}
+
 	
 	// poleas
-	translate ([-x_end_alto/2,-15.5-12,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	translate ([-x_end_alto/2,-28.5,(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
-	translate ([-x_end_alto/2,-15.5-12,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
+	translate ([-x_end_alto/2,-28.5,x_end_largo-(x_end_largo-40)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
-//	translate ([-x_end_alto+grueso,-15.5-12,10]) rotate([0,-90,0]) 
-//	 //#nema17(h=16,polea=12,shaft=false);
-//	 polea();
-//	translate ([-x_end_alto+grueso,-15.5-12,x_end_largo-10]) rotate([0,-90,0]) 
-//	 #nema17(h=16,polea=12,shaft=false);
 	
-	translate([-3,-10,x_end_largo/2])
+	translate([-3+0.5,-10,x_end_largo/2])
 	rotate([0,90,-90])
 	fija_shaft();
-	translate([-x_end_alto+3,-10,x_end_largo/2])
+	translate([-x_end_alto+3+0.5,-10,x_end_largo/2])
 	rotate([0,-90,90])
 	fija_shaft(par=false);
-	
-	%translate([-3+16,-7,x_end_largo/2]) rotate ([90,0,0]){
+
+	//barras eje X	
+	//%translate([-3+16,-7,x_end_largo/2]) rotate ([90,0,0]){
+	%translate([4+5+0.5,-7,x_end_largo/2]) rotate ([90,0,0]){
 	cylinder(r=4,h=100);
 	translate([-x_rod_distance+0,0,0])
 	cylinder(r=4,h=100);

@@ -8,7 +8,7 @@ use <inc/bearing.scad>
 
 impresion=true; //para posicionar...
 
-alt_f=-14; //altura extra de los agujeros de anclaje extrusores
+alt_f=-13.7; //altura extra de los agujeros de anclaje extrusores
 dbof=7+10; //distancia al borde del carro de los agujeos de fijación correa
 grueso_fijacion=4; //este grueso incluye el grosor de la correa (0.75mm para GT2==belt_grueso)
 ancho_fijacion=16; //entre centros de los agujeros
@@ -27,10 +27,18 @@ module carro_x_base(){
 	//rail fijación correa
 	//cube([10,x_end_largo-20-12,10],center=true);
 	//translate([-belt_ancho/2,-(x_end_largo-20-12)/2+grueso_fijacion,0])
-	translate([-belt_ancho*3/2,-(40-12)/2+grueso_fijacion,0])
+	//translate([-belt_ancho*3/2,-(40-12)/2+grueso_fijacion,0])
+	translate([-belt_ancho+alt_f,-(40-12)/2+grueso_fijacion,0])
 	//cube([belt_ancho,(x_end_largo-20-12)/2-grueso_fijacion,xc_largo]);
 	//cube([belt_ancho*1.5,(40-12)/2-grueso_fijacion,9.3-5]);
-	cube([belt_ancho*3,(40-12)/2-grueso_fijacion,xc_largo]);
+	//cube([belt_ancho*3,(40-12)/2-grueso_fijacion,xc_largo]);
+
+	difference(){
+	translate([-belt_ancho+3,0,0])
+	cube([belt_ancho*4-alt_f,(40-12)/2-grueso_fijacion,xc_largo]);
+	translate([-belt_ancho,4,-1])
+	cube([belt_ancho*4-alt_f,bearing_size/2,xc_largo+2]);
+	}
 
 
 

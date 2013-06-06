@@ -31,8 +31,8 @@ x_end_ancho=35+8;
 x_rod_distance = 31+10; //x_end_alto+8;
 y_rod_distance = 55;
 
-bearing_diameter = 10;
-thinwall = 2;
+bearing_diameter = 10.5;
+thinwall = 2+1;
 bearing_size = bearing_diameter + 2 * thinwall;
 
 623_id=3;
