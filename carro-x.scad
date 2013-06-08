@@ -62,10 +62,10 @@ module carro_x_holes(){
 	cylinder(r=m3_diameter/2,h=100,$fn=6);
 
 	//agujeros correa
-	translate([0,0,5])
-	cube ([belt_ancho*1.5,100,belt_grueso*2],center=true);
-	translate([0,0,xc_largo-5])
-	cube ([belt_ancho*1.5,100,belt_grueso*2],center=true);
+	translate([0,0,5-0.8])
+	cube ([belt_ancho*1.5,100,belt_grueso+1],center=true);
+	translate([0,0,xc_largo-5+0.8])
+	cube ([belt_ancho*1.5,100,belt_grueso+1],center=true);
 
 	//agujeros fijaciones correas agujeros a 12mm, tornillos
 	for (i= [-1, 1]){
@@ -158,19 +158,19 @@ module fija_correa(){
 	cylinder(r=5-0.4,h=grueso_fijacion+fge,$fn=25);
 	}
 	// hueco correa
-	translate([-belt_ancho/2,+10,grueso_fijacion]) rotate([90,0,0])
-	cube([belt_ancho,(5)*2,20]);
+	translate([-belt_ancho/2-0.5,+10,grueso_fijacion]) rotate([90,0,0])
+	cube([belt_ancho+1,(5)*2,20]);
 
 	//agujeros tornillos
 	translate([ancho_fijacion/2,0,-10+2])
-	screw(r=m3_diameter/2, slant=false, head_drop=10, h=50, $fn=15);
+	screw(r=m3_diameter/2, slant=false, head_drop=0, h=50, $fn=15);
 	translate([-ancho_fijacion/2,0,-10+2])
-	screw(r=m3_diameter/2, slant=false, head_drop=10, h=50, $fn=15);
+	screw(r=m3_diameter/2, slant=false, head_drop=0, h=50, $fn=15);
 
 	//dientes fijación correa
  	for ( i = [0 : 33] ){
-   		translate([-belt_ancho/2,25-i*belt_tooth_distance,grueso_fijacion-belt_grueso]) 
-		 cube([belt_ancho,1.2,3]);
+   		translate([-belt_ancho/2-0.5,25-i*belt_tooth_distance,grueso_fijacion-belt_grueso]) 
+		 cube([belt_ancho+1,1.2,3]);
 	}
  
 
@@ -182,6 +182,8 @@ module carro_x(){
 	difference(){
 	carro_x_base();
 	carro_x_holes();
+	// esto es pare ver dentro
+	//cube([30,100,100]);
 	}
 }
 

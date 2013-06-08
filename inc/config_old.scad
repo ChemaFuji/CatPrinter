@@ -17,18 +17,18 @@ bajos = 6;
 grueso=5;
 
 //x_end data y-carriage
-yc_alto=33-10;
-yc_largo=55;
-yc_ancho=35+8;
+x_end_alto=33-10;
+x_end_largo=55;
+x_end_ancho=35+8;
 
 //altura polea respecto barra superior
 //pos barra altura-2 del motor
 //pos polea (shaft motor 24mm, polea 18mm alto) 6mm sobre motor (+-2mm)
 //espacio para polea (altura) = 12-14mm
 
-//x_rod_distance = (altura-2+grueso-yc_alto)*2; //29.25*2;
+//x_rod_distance = (altura-2+grueso-x_end_alto)*2; //29.25*2;
 //x_rod_distance = 29.25*2-10;
-x_rod_distance = 31+10; //yc_alto+8;
+x_rod_distance = 31+10; //x_end_alto+8;
 y_rod_distance = 55;
 
 bearing_diameter = 10.5;
@@ -42,7 +42,7 @@ bearing_size = bearing_diameter + 2 * thinwall;
 //x-carriage
 xc_alto=29.25;
 xc_largo=90-50;
-xc_ancho=altura-2+grueso-yc_alto;
+xc_ancho=altura-2+grueso-x_end_alto;
 
 
 
