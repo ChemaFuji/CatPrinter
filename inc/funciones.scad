@@ -109,12 +109,22 @@ module cylinder_poly(r, h, center=false){
 }
 
 module fillet(radius, height=100, $fn=0) {
-    //this creates acutal fillet
-    translate([-radius, -radius, -height/2-0.01])
-        difference() {
-            cube([radius*2, radius*2, height+0.02]);
-            cylinder(r=radius, h=height+0.02, $fn=$fn);
-        }
+    //this creates actal fillet
+	if (radius > -0.0001){
+	    translate([-radius, -radius, -height/2-0.01])
+	        difference() {
+	            cube([radius*2, radius*2, height+0.02]);
+	            cylinder(r=radius, h=height+0.02, $fn=$fn);
+	        }
+	}else{
+	    //translate([-radius/2, -radius/2, -height/2-0.01])
+		translate([0, 0, -height/2-0.01])
+	        union() {
+	            cube([-radius*2, -radius*2, height+0.02]);
+	            cylinder(r=-radius, h=height+0.02, $fn=$fn);
+	        }
+	
+		}
 }
 
 module cube_fillet(size, radius=-1, vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], center=false, $fn=0){
@@ -136,12 +146,15 @@ module cube_negative_fillet(size, radius=-1, vertical=[3,3,3,3], top=[0,0,0,0], 
             rotate([0, 0, 90*i]) translate([size[1-j[i]]/2, size[j[i]]/2, 0]) fillet(radius, size[2], $fn=$fn);
         } else {
             rotate([0, 0, 90*i]) translate([size[1-j[i]]/2, size[j[i]]/2, 0]) fillet(vertical[i], size[2], $fn=$fn);
+			
         }
         rotate([90*i, -90, 0]) translate([size[2]/2, size[j[i]]/2, 0 ]) fillet(top[i], size[1-j[i]], $fn=$fn);
         rotate([90*(4-i), 90, 0]) translate([size[2]/2, size[j[i]]/2, 0]) fillet(bottom[i], size[1-j[i]], $fn=$fn);
 
     }
 }
+
+
 
 module cube_fillet_inside(size, radius=-1, vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], $fn=0){
     //makes CENTERED cube with round corners
@@ -165,4 +178,12 @@ module pushfit_rod(diameter,length){
  cylinder(h = length, r=diameter/2, $fn=30);
  translate(v=[0,-diameter/4,length/2]) cube(size = [diameter,diameter/2,length], center = true);
  translate(v=[0,-diameter/2-2,length/2]) cube(size = [diameter,1,length], center = true);
+}
+
+module brida(w=4,h=2.5,r=10){
+	difference(){
+	     cylinder(h = w, r=r+h, $fn=50, center=true);
+	   
+	     cylinder(h = w*2, r=r, $fn=50, center=true);
+	  }
 }
