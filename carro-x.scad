@@ -8,6 +8,11 @@ use <inc/bearing.scad>
 
 impresion=true; //para posicionar...
 
+brimw=5; //Famoso brim, cuanto
+brimh=0.4; //Brim grueso capa
+
+fijaciones=false; //si ponemos las fijaciones o no
+
 alt_f=-13.7; //altura extra de los agujeros de anclaje extrusores
 dbof=7+10; //distancia al borde del carro de los agujeos de fijación correa
 grueso_fijacion=4; //este grueso incluye el grosor de la correa (0.75mm para GT2==belt_grueso)
@@ -15,14 +20,17 @@ ancho_fijacion=16; //entre centros de los agujeros
 fge=1.5; //grueso extra de la fijación correa
 
 module carro_x_base(){
+	//brim
+	//cube([50,50,brimh]);
+
 	// Bearing holder
 
 	//translate ([12.75+(33/2),0,0]) 
 	translate ([x_rod_distance/2,0,0]) 
-	 soporte_bearing(largo=xc_largo,ancho=x_rod_distance/2);	
+	 soporte_bearing(largo=xc_largo,ancho=x_rod_distance/2,brimw=brimw,brimh=brimh);	
 
 	translate ([-x_rod_distance/2,0,0]) rotate([0,0,180]) 
-	 soporte_bearing(largo=xc_largo,ancho=x_rod_distance/2);	
+	 soporte_bearing(largo=xc_largo,ancho=x_rod_distance/2,brimw=brimw,brimh=brimh);	
 
 	//rail fijación correa
 	//cube([10,x_end_largo-20-12,10],center=true);
@@ -34,10 +42,15 @@ module carro_x_base(){
 	//cube([belt_ancho*3,(40-12)/2-grueso_fijacion,xc_largo]);
 
 	difference(){
-	translate([-belt_ancho+3,0,0])
-	cube([belt_ancho*4-alt_f,(40-12)/2-grueso_fijacion,xc_largo]);
+	union(){
+		translate([-belt_ancho+3,0,0])
+		cube([belt_ancho*4-alt_f,(40-12)/2-grueso_fijacion,xc_largo]);
+		translate([-belt_ancho+3-brimw,-brimw,0])
+		cube([belt_ancho*4-alt_f+brimw*2,(40-12)/2-grueso_fijacion+brimw*2,brimh]);
+
+	}
 	translate([-belt_ancho,4,-1])
-	cube([belt_ancho*4-alt_f,bearing_size/2,xc_largo+2]);
+	cube([belt_ancho*4-alt_f+brimw*2,bearing_size/2+brimw*2,xc_largo+2]);
 	}
 
 
@@ -150,12 +163,20 @@ module carro_x_holes(){
 module fija_correa(){
  difference(){
 	union(){
-	translate([-ancho_fijacion/2,-(5-0.4),0])
-	cube([ancho_fijacion,(5-0.4)*2,grueso_fijacion+fge]);
+	translate([0,0,(grueso_fijacion+fge)/2])
+	cube([ancho_fijacion,(5-0.4)*2,grueso_fijacion+fge],center=true);
+	if(brimw>0){
+	cube([ancho_fijacion+2*brimw,(5-0.4)*2+2*brimw,brimh],center=true);
 	translate([ancho_fijacion/2,0,0])
-	cylinder(r=5-0.4,h=grueso_fijacion+fge,$fn=25);
+	cylinder(r=5-0.4+brimw,h=brimh,$fn=25,center=true);
 	translate([-ancho_fijacion/2,0,0])
-	cylinder(r=5-0.4,h=grueso_fijacion+fge,$fn=25);
+	cylinder(r=5-0.4+brimw,h=brimh,$fn=25,center=true);
+	}
+	
+	translate([ancho_fijacion/2,0,(grueso_fijacion+fge)/2])
+	cylinder(r=5-0.4,h=grueso_fijacion+fge,$fn=25,center=true);
+	translate([-ancho_fijacion/2,0,(grueso_fijacion+fge)/2])
+	cylinder(r=5-0.4,h=grueso_fijacion+fge,$fn=25,center=true);
 	}
 	// hueco correa
 	translate([-belt_ancho/2-0.5,+10,grueso_fijacion]) rotate([90,0,0])
@@ -182,7 +203,7 @@ module carro_x(){
 	difference(){
 	carro_x_base();
 	carro_x_holes();
-	// esto es pare ver dentro
+	// esto es para ver dentro
 	//cube([30,100,100]);
 	}
 }
@@ -190,15 +211,16 @@ module carro_x(){
 carro_x();
 
 if (impresion){
-	//fijaciones
-	translate([-15,-18,0])
-	rotate([0,0,180])
-	fija_correa();
-
-	translate([15,-18,0])
-	rotate([0,0,180])
-	fija_correa();
-
+	if(fijaciones){
+		//fijaciones
+		translate([-15-4,-18-7,0])
+		rotate([0,0,180])
+		fija_correa();
+	
+		translate([15+4,-18-7,0])
+		rotate([0,0,180])
+		fija_correa();
+	}
 
 } else {
 	translate([-24+alt_f,-bearing_size-17,45])
@@ -221,13 +243,14 @@ if (impresion){
 	}
 	
 	
-	
-	//fijaciones
-	translate([0,-(x_end_largo-20-12)/2,dbof])
-	rotate([90,0,180])
-	fija_correa();
-	
-	translate([0,-(x_end_largo-20-12)/2,xc_largo-dbof])
-	rotate([90,0,180])
-	fija_correa();
+	if(fijaciones){	
+		//fijaciones
+		translate([0,-(x_end_largo-20-12)/2,dbof])
+		rotate([90,0,180])
+		fija_correa();
+		
+		translate([0,-(x_end_largo-20-12)/2,xc_largo-dbof])
+		rotate([90,0,180])
+		fija_correa();
+	}
 }

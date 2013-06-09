@@ -59,26 +59,36 @@ module horizontal_bearing_test(){
 
 
 
-module vertical_bearing_base(largo=60,ancho=bearing_size,$fn=60){
- translate(v=[-(ancho)/2,0,largo/2]) cube(size = [ancho,bearing_size,largo], center = true);
- cylinder(h = largo, r=bearing_size/2, $fn = $fn);
+module vertical_bearing_base(largo=60,ancho=bearing_size,$fn=60,brimw=0){
+ translate(v=[-(ancho)/2,0,largo/2]) 
+  cube(size = [ancho+(brimw*2),bearing_size+(brimw*2),largo], center = true);
+  cylinder(h = largo, r=bearing_size/2+brimw, $fn = $fn);
 }
 
 module vertical_bearing_holes(largo=60,corte=false,$fn=60){
   translate(v=[0,0,-1]) cylinder(h = largo+2, r=bearing_diameter/2, $fn = $fn);
 	if(corte){
-    		rotate(a=[0,0,-largo]) translate(v=[bearing_diameter/2+thinwall,0,largo/2]) cube(size = [bearing_diameter+thinwall,1,largo+2], center = true);
+    		rotate(a=[0,0,-largo]) translate(v=[bearing_diameter/2+thinwall,0,largo/2]) 
+		cube(size = [bearing_diameter+thinwall,1,largo+2], center = true);
 	}
 }
 
-module soporte_bearing(largo=25,ancho=bearing_size,corte=false,$fn=60){
+module soporte_bearing(largo=25,ancho=bearing_size,corte=false,$fn=60,brimw=0,brimh=0.4){
 	difference(){
+	if(brimw>0){
+		union(){
+		vertical_bearing_base(largo=largo,ancho=ancho,$fn=$fn,brimw=0);
+		vertical_bearing_base(largo=brimh,ancho=ancho,$fn=$fn,brimw=brimw);
+		}
+
+	} else {
 	vertical_bearing_base(largo=largo,ancho=ancho,$fn=$fn);
+	}
 	vertical_bearing_holes(largo=largo,corte=corte);
 	}
 }
-soporte_bearing(largo=30,ancho=50,corte=true);
-%cube ([10,12,25]);
+//soporte_bearing(largo=30,ancho=50,corte=true,brimw=5,brimh=0.4);
+//%cube ([10,12,25]);
 //translate([-50,0,0]) cube([50,10,30]);
 //translate([-50+bearing_size/2,0,0]) cube([50,10,10]);
 //horizontal_bearing_test();
