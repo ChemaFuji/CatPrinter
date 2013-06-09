@@ -7,7 +7,7 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=false; //para posicionar...
+impresion=true; //para posicionar...
 altura_bearing=5;
 zipw=3.5+0.5;
 ziph=2+0.5;
