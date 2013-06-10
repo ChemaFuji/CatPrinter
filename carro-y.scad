@@ -7,7 +7,7 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=true; //para posicionar...
+impresion=false; //para posicionar...
 altura_bearing=5;
 zipw=3.5+0.5;
 ziph=2+0.5;
@@ -143,8 +143,8 @@ if(impresion){
 
 	
 	// poleas
-	//translate ([-yc_alto/2,-28.5,(yc_largo-40)/2]) rotate ([0,-90,0]) 
-	translate ([0,-28.5,(yc_largo-40)/2]) rotate ([0,-90,0]) 
+	translate ([-yc_alto/2,-28.5,(yc_largo-40)/2]) rotate ([0,-90,0]) 
+	//translate ([0,-28.5,(yc_largo-40)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
 	translate ([-yc_alto/2,-28.5,yc_largo-(yc_largo-40)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);

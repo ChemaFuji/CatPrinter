@@ -8,10 +8,12 @@ use <inc/bearing.scad>
 
 impresion=true; //para posicionar...
 
-brimw=5-5; //Famoso brim, cuanto
+aligerado=true; //menos plástico, menos warping
+
+brimw=5; //Famoso brim, cuanto
 brimh=0.4; //Brim grueso capa
 
-fijaciones=true; //si ponemos las fijaciones o no a imprimir
+fijaciones=false; //si ponemos las fijaciones o no a imprimir
 
 alt_f=-13; //altura extra de los agujeros de anclaje extrusores
 dbof=5-0.8; //distancia al borde del carro de los agujeros de fijación correa
@@ -140,6 +142,16 @@ module carro_x_holes(){
 		cube([m3_nut_size,20,2.5],center=true);
 	}}
 
+	if(aligerado){
+		translate([0,0,xc_largo/2])
+		rotate([90,0,0]){
+			cylinder(r=7,h=50,$fn=30, center=true);
+			for(i=[-1,1]){
+				translate([i*35,0,0])
+				cylinder(r=14,h=50,$fn=30, center=true);
+			}
+		}
+	}
 
 }
 
