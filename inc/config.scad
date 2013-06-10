@@ -16,7 +16,7 @@ bajos = 6;
 
 grueso=5;
 
-//x_end data y-carriage
+//y-carriage
 yc_alto=33-10;
 yc_largo=55;
 yc_ancho=35+8;
@@ -28,10 +28,10 @@ yc_ancho=35+8;
 
 //x_rod_distance = (altura-2+grueso-yc_alto)*2; //29.25*2;
 //x_rod_distance = 29.25*2-10;
-x_rod_distance = 31+10; //yc_alto+8;
+x_rod_distance = 31+10; //yc_alto+8 +2* altura fijaciones (5);
 y_rod_distance = 55;
 
-bearing_diameter = 10.5;
+bearing_diameter = 10.2;
 thinwall = 2+1;
 bearing_size = bearing_diameter + 2 * thinwall;
 
@@ -40,9 +40,17 @@ bearing_size = bearing_diameter + 2 * thinwall;
 623_h=4;
 
 //x-carriage
-xc_alto=29.25;
-xc_largo=90-50;
-xc_ancho=altura-2+grueso-yc_alto;
+//xc_alto=29.25;
+//xc_alto=x_rod_distance/2;
+xc_largo=40;
+//xc_ancho=altura-2+grueso-yc_alto;
+xc_ancho=40-12; //espacio entre ejes poleas en carro Y, menos grosor poleas
+grueso_fijacion=4; //este grueso incluye el grosor de la correa (0.75mm para GT2==belt_grueso)
+ancho_fijacion=14; //entre centros de los agujeros
+largo_fijacion=10; 
+red_fijacion=0.4; //cuanto más pequeña es la fijación con respecto a su agujero
+fge=1.5; //grueso extra de la fijación correa
+tbf=3.5; //espacio entre fijación y su tuerca
 
 
 
