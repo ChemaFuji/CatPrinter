@@ -87,8 +87,8 @@ module soporte_bearing(largo=25,ancho=bearing_size,corte=false,$fn=60,brimw=0,br
 	vertical_bearing_holes(largo=largo,corte=corte);
 	}
 }
-//soporte_bearing(largo=30,ancho=50,corte=true,brimw=5,brimh=0.4);
-//%cube ([10,12,25]);
+soporte_bearing(largo=30,ancho=50,corte=true,brimw=5,brimh=0.4);
+cube ([10,12,25]);
 //translate([-50,0,0]) cube([50,10,30]);
 //translate([-50+bearing_size/2,0,0]) cube([50,10,10]);
 //horizontal_bearing_test();

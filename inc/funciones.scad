@@ -8,7 +8,7 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://github.com/prusajr/PrusaMendel
 
-module screw(h=20, r=2, r_head=3.5, head_drop=0, slant=true, poly=false, $fn=0){
+module screw(h=20, r=2, r_head=3.5, head_drop=0, slant=true, poly=false, $fn=0, $fnn=0){
     //makes screw with head
     //for substraction as screw hole
     if (poly) {
@@ -17,11 +17,19 @@ module screw(h=20, r=2, r_head=3.5, head_drop=0, slant=true, poly=false, $fn=0){
         cylinder(h=h, r=r, $fn=$fn);
     }
     if (slant) {
-        translate([0, 0, head_drop-0.01]) cylinder(h=r_head, r2=0, r1=r_head, $fn=$fn);
+		if($fnn == 0) {
+		translate([0, 0, head_drop-0.01]) cylinder(h=r_head, r2=0, r1=r_head, $fn=$fn);
+		}else{
+        translate([0, 0, head_drop-0.01]) cylinder(h=r_head, r2=0, r1=r_head, $fn=$fnn);
+		}
     }
 
     if (head_drop > 0) {
+		if($fnn == 0) {
         translate([0, 0, -0.01]) cylinder(h=head_drop+0.01, r=r_head, $fn=$fn);
+		}else{
+		translate([0, 0, -0.01]) cylinder(h=head_drop+0.01, r=r_head, $fn=$fnn);
+		}
     }
 }
 
@@ -186,4 +194,42 @@ module brida(w=4,h=2.5,r=10){
 	   
 	     cylinder(h = w*2, r=r, $fn=50, center=true);
 	  }
+}
+
+module fija_correa(){
+ difference(){
+	union(){
+		translate([0,0,(grueso_fijacion+fge)/2])
+		cube([ancho_fijacion,(largo_fijacion/2-red_fijacion)*2,grueso_fijacion+fge],center=true);
+		if(brimw>0){
+			cube([ancho_fijacion+2*brimw,(largo_fijacion/2-red_fijacion)*2+2*brimw,brimh],center=true);
+			for(i=[-1,1]){
+				translate([i*(ancho_fijacion-2)/2,0,0])
+				cylinder(r=largo_fijacion/2-red_fijacion+brimw,h=brimh,$fn=25,center=true);
+			}
+		}
+		for(i=[-1,1]){
+			translate([i*(ancho_fijacion-2)/2,0,(grueso_fijacion+fge)/2])
+			cylinder(r=largo_fijacion/2-red_fijacion,h=grueso_fijacion+fge,$fn=25,center=true);
+		}
+	} //fin union
+
+	// hueco correa
+	translate([-belt_ancho/2-1,largo_fijacion,grueso_fijacion]) rotate([90,0,0])
+	cube([belt_ancho+2,largo_fijacion,20]);
+
+	//agujeros tornillos
+	translate([ancho_fijacion/2,0,-largo_fijacion+2])
+	screw(r=m3_diameter/2, slant=false, head_drop=0, h=50, $fn=15);
+	translate([-ancho_fijacion/2,0,-largo_fijacion+2])
+	screw(r=m3_diameter/2, slant=false, head_drop=0, h=50, $fn=15);
+
+	//dientes fijación correa
+ 	for ( i = [0 : 33] ){
+   		translate([-belt_ancho/2-1,25-i*belt_tooth_distance,grueso_fijacion-belt_grueso]) 
+		 cube([belt_ancho+2,1.2,3]);
+	}
+ 
+
+ } //fin difference
 }
