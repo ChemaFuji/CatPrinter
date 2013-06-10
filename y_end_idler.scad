@@ -18,6 +18,8 @@ module esquina_base(){
 	translate([11,5,altura/2]) rotate([0,0,90]) 
 	cube_fillet([ancho+2+2,fondo,altura], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
 
+//translate([18,5.5+28.5-10,altura-4.2-m4_diameter/2-yc_alto/2])
+//polea();
 }
 
 module esquina_holes(){
@@ -54,9 +56,10 @@ module esquina_holes(){
 
 
   //Hueco tensor
-	translate([-1,5.5+28.5,altura-4.2-m4_diameter/2-yc_alto/2])
+	translate([-1,5.5+28.5-10,altura-4.2-m4_diameter/2-yc_alto/2])
 	rotate([0,90,0])
 	cylinder(r=m4_diameter/2+0.2,h=30);
+	
 
   //Un poco menos de plástico
 	translate([-10,-10,-1])
