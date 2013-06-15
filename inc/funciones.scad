@@ -215,7 +215,7 @@ module fija_correa(){
 	} //fin union
 
 	// hueco correa
-	translate([-belt_ancho/2-1,largo_fijacion,grueso_fijacion]) rotate([90,0,0])
+	translate([-belt_ancho/2-1,largo_fijacion,grueso_fijacion+0.5]) rotate([90,0,0])
 	cube([belt_ancho+2,largo_fijacion,20]);
 
 	//agujeros tornillos
@@ -226,7 +226,7 @@ module fija_correa(){
 
 	//dientes fijación correa
  	for ( i = [0 : 33] ){
-   		translate([-belt_ancho/2-1,25-i*belt_tooth_distance,grueso_fijacion-belt_grueso]) 
+   		translate([-belt_ancho/2-1,25-i*belt_tooth_distance+0.4,grueso_fijacion-belt_grueso-0.5]) 
 		 cube([belt_ancho+2,1.2,3]);
 	}
  
