@@ -8,6 +8,9 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://github.com/prusajr/PrusaMendel
 
+brimw=5; //Famoso brim, cuanto
+brimh=0.25; //Brim grueso capa
+
 // Esquinas:
 altura = 40;
 fondo = 22;

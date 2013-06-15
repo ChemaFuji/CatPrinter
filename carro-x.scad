@@ -10,9 +10,6 @@ impresion=true; //para posicionar...
 
 aligerado=true; //menos plástico, menos warping
 
-brimw=5; //Famoso brim, cuanto
-brimh=0.4; //Brim grueso capa
-
 fijaciones=false; //si ponemos las fijaciones o no a imprimir
 
 alt_f=-13; //altura extra de los agujeros de anclaje extrusores
