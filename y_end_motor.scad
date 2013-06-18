@@ -83,5 +83,5 @@ module esquinam_holder(){
 }
 
 esquinam_holder();
-//translate ([30,22,8]) rotate ([180,0,0]) {
-//nema17(h=8,holes=0,shadow=5, polea=12);}
+translate ([30,22,8]) rotate ([180,0,0]) {
+nema17(h=8,holes=0,shadow=5, polea=12);}

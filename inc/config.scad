@@ -12,7 +12,7 @@ brimw=5; //Famoso brim, cuanto
 brimh=0.25; //Brim grueso capa
 
 // Esquinas:
-altura = 40;
+altura = 20; //original 40
 fondo = 22;
 ancho = 18;
 bajos = 6;
@@ -20,7 +20,7 @@ bajos = 6;
 grueso=5;
 
 //y-carriage
-yc_alto=33-10;
+yc_alto=33-10-6+2;
 yc_largo=55;
 yc_ancho=35+8;
 
