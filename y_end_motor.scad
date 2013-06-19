@@ -8,17 +8,23 @@
 // http://prusamendel.org
  
 include <inc/config.scad>
+extra_long=12;
 
 module esquinam_base(){
- translate([0,0,0]) cube([8,40,16+25-1]); // plate touching the base
+ difference(){
+	 translate([0,0,0]) cube([8,40,34]); // plate touching the back wall
+	 translate([-1,0,36])
+	 rotate([0,90,0])
+	 cylinder(r=19,h=10,$fn=40);
+ }
  translate([0+4,-5,0]) 
- cube_fillet([41,5.01,22], vertical=[1,1,1,1], top=[2,2,2,-15], center=false);
- //cube_fillet_inside([41,5.01,22], vertical=[1,1,1,1], top=[2,2,2,15], center=false);
- translate([0+4,-5,0]) cube([50-4,15,5]); // plate touching the base
- translate([0,-5+4,0]) cube([18,50-4,5]);
-	translate([11,5,altura/2]) rotate([0,0,90]) 
-	//cube_fillet([ancho+2,fondo,altura], vertical=[3,3,3,8], top=[2,2,2,2], center=true);
-	cube_fillet([ancho+2+2,fondo,altura], vertical=[3,3,3,9], top=[2,2,2,2], center=true);
+ cube_fillet([41,5.01,22-2], vertical=[1,1,1,1], top=[2,2,2,-15+3], center=false); //refuerzo lateral
+ 
+ translate([0+4,-5,0]) cube([50-4,15,5]); // plate touching the motor (1/2)
+ translate([0,-5+4,0]) cube([18,50-4,5]); // plate touching the motor (2/2)
+	translate([11+extra_long/2,5,altura/2]) rotate([0,0,90]) 
+	//soporte barra eje Y
+	cube_fillet([ancho+2,fondo+extra_long,altura], vertical=[3,3,3,9], top=[2,2,2,2], center=true);
 
 }
 
@@ -31,28 +37,34 @@ module esquinam_holes(){
  translate([50-1.5,10-1.5,0]) rotate([0,0,-45]) translate([-15,0,-1]) cube([30,30,51]);
 
  // Frame mounting screw holes
- translate([-1,10,10+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
- translate([-1,10+20,10+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
- translate([-1,10+10,10+20+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
+ //translate([-1,10,10+5-5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30); //en la fijación barra
+ translate([-1,13+20,10]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
+ translate([-1,13+10,10+20]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30); //arriba
 
- // Frame mounting screw head holes
- translate([4,10,10+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
- translate([4,10+20,10+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
- translate([4,10+10,10+20+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
- translate([4,10+10-3.1,10+20+5]) cube([10,6.2,10]);
+ // Frame mounting screw nut holes
+ //%translate([4,10,10+5-5]) rotate([0,90,0]) cylinder(h = 50, r=3.1, $fn=30); //en la fijación barra
+ translate([4+1,13+20,10]) rotate([0,90,0]) cylinder(h = 20, r=m3_nut_diameter/2, $fn=6);
+ translate([4+1,13+10,10+20]) rotate([0,90,0]) cylinder(h = 20, r=m3_nut_diameter/2, $fn=6);
+ //translate([4,13+10-3.1,10+20]) cube([10,6.2,10]);
 
   // Hueco para barra lisa
-  translate([2,5.5,altura-2]) rotate([0,90,0]) cylinder(h = 23, r=4.2, $fn=30); 
+  translate([2-3,5.5,altura-2]) rotate([0,90,0]) cylinder(h = 230, r=4.2, $fn=30); 
 //  // Brida
 //  translate([13,-15,altura-8]) rotate([0,0,90]) cube([ancho*2,3.5,2]);
   // Bridas
-  //translate([13,-15,altura-8]) rotate([0,0,90]) cube([ancho*2,3.5,2]);
-	translate([7,5.5,altura-6.1])
+	translate([7+1,5.5,altura-6.1])
 	rotate([0,90,0])
    	brida(r=6);
-	translate([16,5.5,altura-6.1])
+	translate([16+3.5,5.5,altura-6.1])
 	rotate([0,90,0])
    	brida(r=6);
+	translate([28,5.5,altura-6.1])
+	rotate([0,90,0])
+   	brida(r=6);
+
+	//Hueco centro para motor
+	translate([30,22,-1])
+	cylinder(r=11.5,h=30,$fn=30);
 
   //Hueco para tornillo motor oculto
 //  translate([23.1,1.1,5]) rotate([0,0,90])
@@ -83,5 +95,5 @@ module esquinam_holder(){
 }
 
 esquinam_holder();
-translate ([30,22,8]) rotate ([180,0,0]) {
-nema17(h=8,holes=0,shadow=5, polea=12);}
+//translate ([30,22,8]) rotate ([180,0,0]) {
+//nema17(h=8,holes=0,shadow=5, polea=12);}

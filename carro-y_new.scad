@@ -7,7 +7,7 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=true; //para posicionar...
+impresion=false; //para posicionar...
 altura_bearing=5;
 zipw=3.5+0.5;
 ziph=2+0.5;
@@ -36,13 +36,17 @@ module yc_base(){
 		translate([0,-12,yc_largo/2])
 		cube([x_rod_distance-14,bearing_size,yc_largo], center=true);
 		for(i=[-1,1]){
-		translate([i*15,-12.5,-5])
+		translate([i*16,-12.5,-5])
 		cylinder(r=5,h=100,$fn=20);
 	}}
 
 }
 
 module yc_holes(){
+
+	//para ver dentro
+	//translate([0,-50,-10]) cube([100,100,100]);
+
 	//hueco bearings eje Y
 	translate([0,0,-5])
 	cylinder(r=bearing_diameter/2,h=100,$fn=20);
@@ -69,6 +73,13 @@ module yc_holes(){
 		rotate([90,0,0])
 		cylinder(r=8,h=100,$fn=40,center=true);
 	}	
+	
+	translate([0,0,28]) 
+	rotate([90,0,0]){
+	cylinder(r=8,h=100,$fn=40,center=true);
+	translate([0,0,-2.9])
+	cylinder(r=12,h=20,$fn=40,center=true);
+	}
 
 //		  // Brida verticales
 //		  translate([10,-yc_alto-6,yc_largo/2-5])  
