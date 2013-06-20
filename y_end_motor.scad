@@ -1,7 +1,7 @@
 // esquina para new printer by Chema
 // Mod basado en
 // PRUSA iteration3
-// Z axis bottom holder
+// Y axis motor end
 // GNU GPL v3
 // Josef Průša <iam@josefprusa.cz> and contributors
 // http://www.reprap.org/wiki/Prusa_Mendel
@@ -18,7 +18,7 @@ module esquinam_base(){
 	 cylinder(r=19,h=10,$fn=40);
  }
  translate([0+4,-5,0]) 
- cube_fillet([41,5.01,22-2], vertical=[1,1,1,1], top=[2,2,2,-15+3], center=false); //refuerzo lateral
+ cube_fillet([41,5.01,22-4], vertical=[1,1,1,1], top=[2,2,2,-15+2], center=false); //refuerzo lateral
  
  translate([0+4,-5,0]) cube([50-4,15,5]); // plate touching the motor (1/2)
  translate([0,-5+4,0]) cube([18,50-4,5]); // plate touching the motor (2/2)
@@ -48,7 +48,7 @@ module esquinam_holes(){
  //translate([4,13+10-3.1,10+20]) cube([10,6.2,10]);
 
   // Hueco para barra lisa
-  translate([2-3,5.5,altura-2]) rotate([0,90,0]) cylinder(h = 230, r=4.2, $fn=30); 
+  #translate([2-3,5.5,altura-2]) rotate([0,90,0]) cylinder(h = 230, r=4.2, $fn=30); 
 //  // Brida
 //  translate([13,-15,altura-8]) rotate([0,0,90]) cube([ancho*2,3.5,2]);
   // Bridas
@@ -64,7 +64,7 @@ module esquinam_holes(){
 
 	//Hueco centro para motor
 	translate([30,22,-1])
-	cylinder(r=11.5,h=30,$fn=30);
+	cylinder(r1=11.5,r2=10,h=30,$fn=30);
 
   //Hueco para tornillo motor oculto
 //  translate([23.1,1.1,5]) rotate([0,0,90])
@@ -94,6 +94,6 @@ module esquinam_holder(){
  }
 }
 
-esquinam_holder();
+//esquinam_holder();
 //translate ([30,22,8]) rotate ([180,0,0]) {
 //nema17(h=8,holes=0,shadow=5, polea=12);}

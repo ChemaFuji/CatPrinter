@@ -35,6 +35,8 @@ bearing_diameter = 10.2;
 thinwall = 2+1;
 bearing_size = bearing_diameter + 2 * thinwall;
 
+sep_tensor=18.5-2;
+
 623_id=3;
 623_od=10;
 623_h=4;

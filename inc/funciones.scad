@@ -188,10 +188,11 @@ module pushfit_rod(diameter,length){
  translate(v=[0,-diameter/2-2,length/2]) cube(size = [diameter,1,length], center = true);
 }
 
-module brida(w=4,h=2.5,r=10){
+module brida(w=4,h=2.5,r=10,size=[0,0,0]){
 	difference(){
+		resize(size)
 	     cylinder(h = w, r=r+h, $fn=50, center=true);
-	   
+	   	resize(size-[h,h,0])
 	     cylinder(h = w*2, r=r, $fn=50, center=true);
 	  }
 }
@@ -215,7 +216,7 @@ module fija_correa(){
 	} //fin union
 
 	// hueco correa
-	translate([-belt_ancho/2-1,largo_fijacion,grueso_fijacion+0.5]) rotate([90,0,0])
+	translate([-belt_ancho/2-1,largo_fijacion,grueso_fijacion]) rotate([90,0,0])
 	cube([belt_ancho+2,largo_fijacion,20]);
 
 	//agujeros tornillos
@@ -226,7 +227,7 @@ module fija_correa(){
 
 	//dientes fijación correa
  	for ( i = [0 : 33] ){
-   		translate([-belt_ancho/2-1,25-i*belt_tooth_distance+0.4,grueso_fijacion-belt_grueso-0.5]) 
+   		translate([-belt_ancho/2-1,25-i*belt_tooth_distance,grueso_fijacion-belt_grueso]) 
 		 cube([belt_ancho+2,1.2,3]);
 	}
  
