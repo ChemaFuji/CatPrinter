@@ -9,6 +9,7 @@
 
 include <inc/config.scad>
 altura_extra=6;
+impresion=true;
 
 module esquina_base(){
  difference(){
@@ -96,7 +97,11 @@ module esquina_holder(){
 // }
 }
 
-//translate([0,0,-9]) 
-//esquina_holder();
+if(impresion){
+translate([0,0,-9]) 
+esquina_holder();
+translate([0,-17,-9]) mirror([0,1,0])
+esquina_holder();
+}
 //translate ([30,22,8]) rotate ([180,0,0]) {
 //nema17(h=8,holes=0,shadow=5, polea=12);}

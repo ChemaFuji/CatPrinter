@@ -9,6 +9,7 @@
  
 include <inc/config.scad>
 extra_long=12;
+impresion=true;
 
 module esquinam_base(){
  difference(){
@@ -88,12 +89,13 @@ module esquinam_holder(){
   esquinam_base();
   esquinam_holes();
  }
- translate([0,-17,0]) mirror([0,1,0]) difference(){
-  esquinam_base();
-  esquinam_holes();
- }
 }
 
-//esquinam_holder();
+if (impresion){
+esquinam_holder();
+translate([0,-17,0]) mirror([0,1,0])
+esquinam_holder();
+
 //translate ([30,22,8]) rotate ([180,0,0]) {
 //nema17(h=8,holes=0,shadow=5, polea=12);}
+}
