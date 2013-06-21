@@ -20,6 +20,10 @@ module esquina_base(){
  }
 	translate([11,5,(altura+altura_extra)/2]) rotate([0,0,90]) 
 	cube_fillet([ancho+2+2,fondo,altura+altura_extra], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
+ if(brimw>0){
+ 	translate([0,0,0]) cube([8+brimw*2,40+brimw*2,brimh]); // plate touching the back wall
+
+ }
 }
 
 module esquina_holes(){
