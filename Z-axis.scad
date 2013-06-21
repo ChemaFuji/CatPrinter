@@ -7,18 +7,23 @@ include <inc/config.scad>
 impresion=true;
 
 module motorz_base(){
-// difference(){
 	 translate([0,-5,0]) 
 		cube_fillet([8,47,36], top=[20,2,20,2]); // plate touching the back wall
-//	 translate([-1,0,36])
-//	 rotate([0,90,0])
-//	 cylinder(r=19,h=10,$fn=40);
-// }
+
  translate([0+0,-5,0]) 
  cube_fillet([45,5.01,19], vertical=[1,1,3,2], top=[2,2,2,15], center=false); //refuerzo lateral
  
  translate([0+4,-5,0]) cube_fillet([50-4,15,5],top=[1,1,1,1]); // plate touching the motor (1/2)
  translate([0,-5+4,0]) cube_fillet([18,50-4,5],top=[1,1,1,1]); // plate touching the motor (2/2)
+
+ //BRIM 
+ if(brimw>0){
+	 translate([4-brimw,-5-brimw,0]) 
+		cube_fillet([50-4+2*brimw,15+2*brimw,brimh]); // plate touching the motor (1/2)
+	 translate([0-brimw,-5+4-brimw,0]) 
+		cube_fillet([18+brimw*2,50-4+brimw*2,brimh]); // plate touching the motor (2/2)
+
+ }
 
 }
 
@@ -67,8 +72,15 @@ module esquinaz_base(){
 	 cube_fillet([8,40,36],top=[20,2,20,2],center=true); // plate touching the back wall
 
 	translate([(fromw+2)/2+0.3,0,28/2]) 
-	//rotate([0,0,90]) 
 	cube_fillet([fromw+2.2,20,28], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
+	
+	if(brimw>0){
+		 translate([4,0,brimh/2]) 
+		 cube_fillet([8+2*brimw,40+2*brimw,brimh],center=true); // plate touching the back wall
+		translate([(fromw+2)/2+0.3,0,brimh/2]) 
+		cube_fillet([fromw+2.2+2*brimw,20+2*brimw,brimh], vertical=[3,3,3,3], center=true);
+
+	}
 }
 
 module esquinaz_holes(barra=false){
@@ -121,19 +133,35 @@ module carroz_base(){
 	for(i=[-1,1]){
 		translate([0,i*(cz_largo/2-cz_fondo),0])
 		cube_fillet([cz_fondo,cz_fondo*2,cz_alto],vertical=[7,7,7,7],center=true);
+		if(brimw>0){
+			translate([0,i*(cz_largo/2-cz_fondo),-cz_alto/2+brimh/2])
+			cube_fillet([cz_fondo+2*brimw,cz_fondo*2+brimw*2,brimh],vertical=[7,7,7,7],center=true);
+		}
 	}
 	//travesaño entre pilares
 	translate([0,0,-cz_alto/2+20/2])
 	cube_fillet([cz_fondo/2,cz_largo-cz_fondo,20],vertical=[0,0,0,0],top=[0,3,0,3],center=true);
+	if(brimw>0){
+		translate([0,0,-cz_alto/2+brimh/2])
+		cube_fillet([cz_fondo/2+2*brimw,cz_largo-cz_fondo+2*brimw,brimh],vertical=[0,0,0,0],center=true);
 	
+	}
  }else{ //sin refuerzo
 	cube_fillet([cz_fondo,cz_largo,cz_alto],vertical=[7,7,7,7],center=true);
+	if(brimw>0){
+		cube_fillet([cz_fondo+brimw*2,2*brimw+cz_largo,brimh],vertical=[7,7,7,7],center=true);
+	}
  }
 
  //fijaciones brazos
  for(i=[-1,1]){
 	translate([cz_fondo,i*(cz_largo/2-cz_fondo/4),0])
 	cube_fillet([cz_fondo*2.5,cz_fondo/2,cz_alto],vertical=[7,7,7,7],top=[5,0,5,-35],center=true);
+	if(brimw>0){
+		translate([cz_fondo,i*(cz_largo/2-cz_fondo/4),-cz_alto/2+brimh/2])
+		cube_fillet([cz_fondo*2.5+2*brimw,cz_fondo/2+2*brimw,brimh],vertical=[7,7,7,7],center=true);
+
+	}
  }
  if(impresion){
 	//sin extras
@@ -162,7 +190,8 @@ module carroz_holes(){
 
  //aligerando 
  if(rfn){ //con refuerzo
-	translate([-cz_fondo/2+grm/2-0.1,0,100/2-cz_alto/2])
+	//espacio para el refuerzo posterior
+	translate([-cz_fondo/2+grm/2-0.1,0,100/2-cz_alto/2+(brimw?brimh:0)])
 	cube([grm,cz_largo-2*cz_fondo,100],center=true);
 
 	// tornillos de fijación del refuerzo
@@ -265,7 +294,7 @@ if (impresion){
 
 	//Soportes superiores barras
 	for(i=[-1,1]){
-		translate([0,i*sep_z/2,-190])
+		translate([0,i*sep_z/2,-260])
 		esquinaz(barra=false);
 	}
 

@@ -6,11 +6,11 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=true; //para posicionar...
+impresion=false; //para posicionar...
 
 aligerado=true; //menos plástico, menos warping
 
-fijaciones=false; //si ponemos las fijaciones o no a imprimir
+fijaciones=true; //si ponemos las fijaciones o no a imprimir
 
 alt_f=-13; //altura extra de los agujeros de anclaje extrusores
 dbof=5-0.8; //distancia al borde del carro de los agujeros de fijación correa
@@ -162,9 +162,45 @@ module carro_x(){
 	}
 }
 
-carro_x();
+module carro_x_montado(){
+	carro_x();
+	translate([-24+alt_f,-bearing_size-17-5,20])
+	rotate([270,90,0])
+	import("/Users/jmmunoz/Dropbox/3d/0\ para\ imprimir/direct_extruder_complete2.stl");
+	
+	translate([54+alt_f,-12-7.7,5.5])
+	rotate([90,0,-90])
+	import("/Users/jmmunoz/gits/CatPrinter/acc/CatNozzle2.stl");
+	
+	translate([0,0,90])
+	rotate([180,0,0]) {
+		translate([-24+alt_f,-bearing_size-17-3,70])
+		rotate([270,90,0])
+		import("/Users/jmmunoz/Dropbox/3d/0\ para\ imprimir/direct_extruder_complete2.stl");
+		
+		translate([54+alt_f,-12-5.5,55])
+		rotate([90,0,-90])
+		import("/Users/jmmunoz/gits/CatPrinter/acc/CatNozzle2.stl");
+	}
+	
+	
+	if(fijaciones){	
+		//fijaciones
+		translate([0,0,0])
+		rotate([0,0,180])
+		fija_correa();
+		
+		translate([0,0,xc_largo])
+		rotate([180,0,180])
+		fija_correa();
+	}
+
+}
+
+
 
 if (impresion){
+	carro_x();
 	if(fijaciones){
 		//fijaciones
 		translate([-15-brimw,-20-2*brimw,0.21])
@@ -182,34 +218,5 @@ if (impresion){
 	}
 
 } else {
-	translate([-24+alt_f,-bearing_size-17,45])
-	rotate([270,90,0])
-	import("/Users/jmmunoz/Dropbox/3d/0\ para\ imprimir/direct_extruder_complete2.stl");
-	
-	translate([54+alt_f,-12,30])
-	rotate([90,0,-90])
-	import("/Users/jmmunoz/gits/CatPrinter/acc/CatNozzle2.stl");
-	
-	translate([0,0,90])
-	rotate([180,0,0]) {
-		translate([-24+alt_f,-bearing_size-17,45])
-		rotate([270,90,0])
-		import("/Users/jmmunoz/Dropbox/3d/0\ para\ imprimir/direct_extruder_complete2.stl");
-		
-		translate([54+alt_f,-12,30])
-		rotate([90,0,-90])
-		import("/Users/jmmunoz/gits/CatPrinter/acc/CatNozzle2.stl");
-	}
-	
-	
-	if(fijaciones){	
-		//fijaciones
-		translate([0,-(x_end_largo-20-12)/2,dbof])
-		rotate([90,0,180])
-		fija_correa();
-		
-		translate([0,-(x_end_largo-20-12)/2,xc_largo-dbof])
-		rotate([90,0,180])
-		fija_correa();
-	}
+	//carro_x_montado();
 }

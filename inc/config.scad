@@ -9,6 +9,8 @@
 // http://github.com/prusajr/PrusaMendel
 
 margen=0.2; //margen en diámetro para los agujeros
+brimh=0.4; //altura de capa para brim
+brimw=5; //cuanto brim (5)
 
 // Extremos eje Y
 altura = 20; //original 40
@@ -32,6 +34,9 @@ grueso=5;
 	//x_rod_distance = 29.25*2-10;
 	x_rod_distance = 31+10; //separación de barras eje X
 	y_rod_distance = 55; //separación de barras eje Y (en caso de dos barras) Obsoleto
+	diam_x=8.1; //Diámetro de la barra lisa del eje X 8.1 PLA, 8.4 ABS
+	belt_space=10; //paso para las correas
+
 
 bearing_diameter = 10+margen; //diámetro de los cojinetes lineales
 thinwall = 2+1; //pared en los cojinetes

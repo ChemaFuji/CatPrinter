@@ -9,16 +9,15 @@ use <inc/bearing.scad>
 
 impresion=true; //para imprimir las piezas
 
-altura_bearing=5;
-zipw=3.5+0.5;
-ziph=2+0.5;
-diam_x=8.1; //Diámetro de la barra lisa 8.1 PLA, 8.4 ABS
-belt_space=10; //paso para las correas
-
 module yc_base(){
 	// Bloque principal
 	translate([-yc_alto/2,-yc_ancho+7.25,0]) 
 	 cube(size = [yc_alto,yc_ancho-13.5,yc_largo], center = false);
+	if(brimw>0){
+		translate([0,-14,0])
+		cube_fillet([x_rod_distance+10+diam_x+2*brimw,bearing_size*2+12+brimw*2,brimh],center=true);
+	//echo ("brimw es: ",brimw," y brimh es: ",brimh);
+	}
 
 
 	// Bearing holder
@@ -91,36 +90,17 @@ module yc_holes(){
 	translate([0,0+2,-2.9])
 	cylinder(r=12,h=20,$fn=40,center=true);
 	}
-
-//		  // Brida verticales
-//		  translate([10,-yc_alto-6,yc_largo/2-5])  
-//			cube([yc_ancho*2,zipw,ziph], center=true);
-//		  translate([10,-yc_alto-6,yc_largo/2+5])  
-//			cube([yc_ancho*2,zipw,ziph], center=true);
-//		  //Horizontal
-//		  translate([10,-yc_alto-6,yc_largo/2+(impresion?15.3:0)])
-//			rotate([0,90,0])  
-//			cube([yc_ancho,5,4], center=true);
-
 	
 	//screws poleas 
 	translate ([40,-28.5-1,(yc_largo-40)/2]) rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=32, h=100, $fn=10);
+	 screw(r=m3_diameter/2, slant=false, head_drop=32, h=100, $fn=10);
 	translate ([20,-28.5-1,yc_largo-(yc_largo-40)/2]) rotate ([0,-90,0]) 
-	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=10, h=50, $fn=10);
+	 screw(r=m3_diameter/2, slant=false, head_drop=10, h=50, $fn=10);
 	
 	translate ([-2-15,-28.5-1,(yc_largo-40)/2]) rotate ([180,-90,0]) 
-	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4+5, h=50, $fn=6);
+	 screw(r=m3_diameter/2, slant=false, head_drop=4+5, h=50, $fn=6);
 	translate ([-2-20,-28.5-1,yc_largo-(yc_largo-40)/2]) rotate ([180,-90,0]) 
-	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=4+10, h=50, $fn=6);
-
-	//screws fijaciones barras
-//	translate ([50,-15+1,yc_largo/2]) 
-//	rotate ([0,-90,0]) 
-//	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=0, h=150);
-//	translate ([50,-15+1-15,yc_largo/2]) 
-//	rotate ([0,-90,0]) 
-//	 screw(r=m3_diameter/2+0.1, slant=false, head_drop=0, h=150);
+	 screw(r=m3_diameter/2, slant=false, head_drop=4+10, h=50, $fn=6);
 
 	//huecos barras
 	for (i=[-1,1]){
@@ -129,44 +109,6 @@ module yc_holes(){
 		pushfit_rod(diam_x,100);
 	}
 
-}
-
-module fija_shaft(par=true){
-	translate([0,0,12]) rotate([-90,180,0]) difference(){
-		translate([0,0,10-1]) 
-	 	 cube_fillet([18,25+4,14-2], vertical=[3,3,3,3], top=[2,2,2,2], center=true);
-		translate([0,0,0]){
-		  // Hueco para barra lisa
-		  translate([0,-100,10+6-4]) rotate([0,90,90]) cylinder(h = 230, r=4.2, $fn=30); 
-		  // Brida
-		  translate([-ancho*1.5,5,9])  cube([ancho*3,zipw,20]);
-
-		  // Brida verticales
-			rotate([0,90,0]){
-		  translate([-yc_ancho/2,7,0]){ 
-			translate([0,0,-5]) 
-			cube([yc_ancho*2,zipw,ziph], center=true);
-		  //%translate([-yc_ancho/2+10,-yc_alto-6,yc_largo/2+5])  
-			translate([0,0,5])
-			cube([yc_ancho*2,zipw,ziph], center=true);
-			}}
-
-		  // Tornillos
-//		  translate([0,7,13]) 
-//			%rotate([180,0,0]) screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?12:6);
-		  translate([0,7-15,13]) 
-			rotate([180,0,0]) 
-			//screw(r=m3_diameter/2+0.1,slant=false,head_drop=4,h=50, $fn=par?6:12);
-			cylinder(r=m3_diameter/2+0.1,h=50,$fn=12);
-		}
-	}
-
-}
-
-module barrasX(){
-	cylinder(r=4,h=100);
-	translate([-x_rod_distance,0,0])
-	cylinder(r=4,h=100);
 }
 
 
@@ -183,8 +125,10 @@ if(impresion){
 	yc_plain();
 	mirror([0,1,0])
 	//rotate([0,0,180])
-	translate([0,80,0])
+	translate([0,90,0])
 	yc_plain();
+
+
 //	translate([20,0,-3])
 //	rotate([90,0,90])
 //	fija_shaft();

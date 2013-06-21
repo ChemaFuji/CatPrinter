@@ -235,6 +235,13 @@ module fija_correa(){
  } //fin difference
 }
 
+module barrasX(longitud=100){
+	cylinder(r=4,h=longitud);
+	translate([-x_rod_distance,0,0])
+	cylinder(r=4,h=longitud);
+}
+
+
 //minkowski(){
 //difference(){
 //	cube([20,20,20]);
