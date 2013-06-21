@@ -1,18 +1,37 @@
-sep_z=150; //separación entre las esquinas
-fromw=29.5; //separación barra lisa de la pared
-cz_fondo=20; //fondo del carro Z
-cz_alto=50;
-cz_largo=sep_z+20;
- esp=6/2; //la mitad del espesor que queremos en la viga
- cur=cz_fondo/2-esp;
-i=1;
-	mikowski(){
-	difference(){
-		translate([cz_fondo/2+esp+30,i*cz_largo/4-(i*5),0])
-		cube([cz_fondo,cz_largo/2-30,cz_alto-12],center=true);
-		translate([0,0,cz_alto*1.2]) rotate([0,90,0])
-		cylinder(r=sep_z/2,h=150,center=true);
-	} 
-	translate([cz_fondo/2+esp+30,i*cz_largo/4-(i*5),0])
-	sphere(cur);
-	}
+// New printer MOD by Chema
+
+// Pieza para pruebas
+// GNU GPL v3
+
+
+include <inc/config.scad>
+use <inc/bearing.scad>
+
+module base(){
+cube_fillet([36,14,16],top=[2,2,2,2]);
+}
+
+module agujeros(){
+
+	translate ([8,20,6]) 
+	rotate ([90,180,0]) 
+	pushfit_rod(diam_x,50);
+
+	translate([20,7,-5])
+	cylinder(r=bearing_diameter/2,h=100,$fn=20);
+	
+	translate ([30,7,20]) rotate ([180,0,0]) 
+	 screw(r=m3_diameter/2, r_head=m3_nut_diameter/2, slant=false, head_drop=10, h=50, $fn=6);
+
+	translate ([30,22,7]) rotate ([90,0,0]) 
+	 screw(r=m3_diameter/2, r_head=m3_nut_diameter/2, slant=false, head_drop=10, h=50, $fn=6);
+
+	translate ([30,-7,7]) rotate ([270,0,0]) 
+	 screw(r=m3_diameter/2, r_head=m3_nut_diameter/2, slant=false, head_drop=10, h=50, $fn=10);
+
+}
+
+difference(){
+	base();
+	agujeros();
+}
