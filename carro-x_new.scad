@@ -161,5 +161,5 @@ if (impresion){
 	}
 
 } else {
-	carro_x_montado();
+	//carro_x_montado();
 }
