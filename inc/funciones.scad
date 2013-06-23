@@ -201,16 +201,16 @@ module fija_correa(){
  difference(){
 	union(){
 		translate([0,0,(grueso_fijacion+fge)/2])
-		cube([ancho_fijacion,(largo_fijacion/2-red_fijacion)*2,grueso_fijacion+fge],center=true);
+		cube([ancho_fijacion-3,(largo_fijacion/2-red_fijacion)*2,grueso_fijacion+fge],center=true);
 		if(brimw>0){
-			cube([ancho_fijacion+2*brimw,(largo_fijacion/2-red_fijacion)*2+2*brimw,brimh],center=true);
+			cube([ancho_fijacion-3+2*brimw,(largo_fijacion/2-red_fijacion)*2+2*brimw,brimh],center=true);
 			for(i=[-1,1]){
 				translate([i*(ancho_fijacion-2)/2,0,0])
 				cylinder(r=largo_fijacion/2-red_fijacion+brimw,h=brimh,$fn=25,center=true);
 			}
 		}
 		for(i=[-1,1]){
-			translate([i*(ancho_fijacion-2)/2,0,(grueso_fijacion+fge)/2])
+			translate([i*(ancho_fijacion-4)/2,0,(grueso_fijacion+fge)/2])
 			cylinder(r=largo_fijacion/2-red_fijacion,h=grueso_fijacion+fge,$fn=25,center=true);
 		}
 	} //fin union
@@ -242,12 +242,3 @@ module barrasX(longitud=100){
 }
 
 
-//minkowski(){
-//difference(){
-//	cube([20,20,20]);
-//	rotate([0,45,0])
-//	cube([50,50,50]);
-//}
-//	
-//translate([20,0,0]) sphere(5);
-//}
