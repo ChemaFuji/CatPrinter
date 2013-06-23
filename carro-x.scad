@@ -6,7 +6,7 @@
 include <inc/config.scad>
 use <inc/bearing.scad>
 
-impresion=false; //para posicionar...
+impresion=true; //para posicionar...
 
 aligerado=true; //menos plástico, menos warping
 
