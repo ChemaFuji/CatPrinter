@@ -9,7 +9,7 @@ use <inc/bearing.scad>
 include <y_end_motor.scad>
 include <y_end_idler.scad>
 include <tensor-y.scad>
-include <carro-y_new.scad>
+include <carro-y_new2.scad>
 include <Z-axis.scad>
 include <carro-x.scad>
 
