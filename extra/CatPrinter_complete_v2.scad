@@ -9,7 +9,7 @@ use <../inc/bearing.scad>
 include <../y_end_motor.scad>
 include <../y_end_idler.scad>
 include <../tensor-y.scad>
-include <../carro-y_new2.scad>
+include <../carro-y_new3.scad>
 include <../Z-axis.scad>
 include <../carro-x_new.scad>
 
@@ -34,7 +34,6 @@ module ejeY(){
 		
 		// poleas
 		translate ([0,-28.5-1,(yc_largo-40)/2]) rotate ([0,-90,0]) 
-		//translate ([0,-28.5,(yc_largo-40)/2]) rotate ([0,-90,0]) 
 		 polea(diam=12,alto=8);
 		translate ([0,-28.5-1,yc_largo-(yc_largo-40)/2]) rotate ([0,-90,0]) 
 		 polea(diam=12,alto=8);
