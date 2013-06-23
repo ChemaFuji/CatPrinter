@@ -21,9 +21,11 @@ bajos = 6;
 grueso=5;
 
 //Carro Y
-	yc_alto=33-10-6+2;
-	yc_largo=55;
+	yc_alto=19; //33-10-6+2;
+	yc_largo=55-4;
 	yc_ancho=35+8;
+	sep_pol=24; //separación entre ejes de poleas
+
 	
 	//altura polea respecto barra superior
 	//pos barra altura-2 del motor
@@ -52,13 +54,13 @@ sep_tensor=18.5-2; //espacio entre el eje del tensor y la barra lisa eje Y
 //Carro X
 	xc_largo=40; //largo del carro X
 	//xc_ancho=altura-2+grueso-yc_alto;
-	xc_ancho=40-12; //espacio entre ejes poleas en carro Y, menos grosor poleas (==ancho carro X)
+	xc_ancho=sep_pol; //espacio entre ejes poleas en carro Y (==ancho carro X)
 	//fijaciones correa carro X
 	grueso_fijacion=4; //este grueso incluye el grosor de la correa (0.75mm para GT2==belt_grueso)
-	ancho_fijacion=14; //entre centros de los agujeros
+	ancho_fijacion=12; //entre centros de los agujeros
 	largo_fijacion=10; 
 	red_fijacion=0.4; //cuanto más pequeña es la fijación con respecto a su hueco en el carro X
-	fge=1.5; //grueso extra de la fijación correa
+	fge=1.0; //grueso extra de la fijación correa
 	tbf=3.5; //espacio entre fijación y su tuerca
 
 // Carro Z
