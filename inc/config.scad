@@ -25,7 +25,7 @@ grueso=5;
 	yc_largo=55-4;
 	yc_ancho=35+8;
 	sep_pol=24; //separación entre ejes de poleas
-
+	sep_polea=24;
 	
 	//altura polea respecto barra superior
 	//pos barra altura-2 del motor
