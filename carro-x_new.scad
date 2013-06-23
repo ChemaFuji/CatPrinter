@@ -154,7 +154,7 @@ if (impresion){
 	if(fijaciones){
 		//fijaciones
 		for(i=[-1,1]){
-			translate([i*(10+brimw),-20-2*brimw,0])
+			translate([i*(10+brimw),-20-2*brimw,brimh/2])
 			rotate([0,0,180])
 			fija_correa();
 		}
