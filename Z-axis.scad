@@ -4,7 +4,7 @@
 
 include <inc/config.scad>
 
-impresion=true;
+impresion=false;
 
 module motorz_base(){
 	 translate([0,-5,0]) 
@@ -104,10 +104,10 @@ module esquinaz_holes(barra=false){
 
   // Hueco para barra lisa
   if(barra){
-  	#translate([fromw,0,-140]) rotate([0,0,0]) cylinder(h = 350, r=4.1, $fn=30, center=true); 
-  }else{
-  	translate([fromw,0,-140]) rotate([0,0,0]) cylinder(h = 350, r=4.1, $fn=30, center=true); 
+  	#translate([fromw,0,-longZ/2+20]) rotate([0,0,0]) cylinder(h = longZ+40, r=4.1, $fn=30, center=true); 
   }
+  	translate([fromw,0,-140]) rotate([0,0,0]) cylinder(h = 350, r=4.1, $fn=30, center=true); 
+  
 
   // Bridas
   //translate([13,-15,altura-8]) rotate([0,0,90]) cube([ancho*2,3.5,2]);
@@ -176,8 +176,9 @@ module carroz_base(){
 	 }}
 	
 	 //plataforma impresión
-	 translate([250/2+cz_fondo/2,0,-cz_alto/2-grm/2])
-	 %cube([250,250,grm],center=true);
+	 translate([280/2+cz_fondo/2,0,-cz_alto/2-grm/2])
+	 %cube([280,250,grm],center=true);
+	 //refuerzo carroZ
  	 translate([-cz_fondo/2+grm/2-0.1,0,35/2-cz_alto/2])
 	 %cube([grm,cz_largo-2*cz_fondo,35],center=true);
 
@@ -258,6 +259,34 @@ module carroz(){
  }
 }
 
+module zaxis(){
+	//carro Z
+	translate([fromw,0,-50])
+	carroz();
+
+	//Soportes inferiores barras
+	for(i=[-1,1]){
+		translate([0,i*sep_z/2,0])
+		esquinaz(barra=true);
+	}
+
+	//Soportes superiores barras
+	for(i=[-1,1]){
+		translate([0,i*sep_z/2,-longZ])
+		esquinaz(barra=false);
+	}
+
+
+	//Soporte Motor
+	translate([0,-21,0]){
+		motorz();
+		translate ([29.5,21,-3]) rotate ([0,0,0]) 
+		nema17(h=8,holes=true,shadow=5, polea=0);
+		
+	}
+
+}
+
 if (impresion){
 
 	//carro Z
@@ -282,29 +311,7 @@ if (impresion){
 
 }else{
 
-	//carro Z
-	translate([fromw,0,-50])
-	carroz();
+	//zaxis();
 
-	//Soportes inferiores barras
-	for(i=[-1,1]){
-		translate([0,i*sep_z/2,0])
-		esquinaz(barra=true);
-	}
-
-	//Soportes superiores barras
-	for(i=[-1,1]){
-		translate([0,i*sep_z/2,-260])
-		esquinaz(barra=false);
-	}
-
-
-	//Soporte Motor
-	translate([0,-21,0]){
-		motorz();
-		translate ([29.5,21,-3]) rotate ([0,0,0]) 
-		nema17(h=8,holes=true,shadow=5, polea=0);
-		
-	}
 }
 

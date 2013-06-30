@@ -10,7 +10,7 @@
 
 margen=0.2; //margen en diámetro para los agujeros
 brimh=0.4; //altura de capa para brim
-brimw=5; //cuanto brim (5)
+brimw=0; //cuanto brim (5)
 
 // Extremos eje Y
 altura = 20; //original 40
@@ -22,10 +22,11 @@ grueso=5;
 
 //Carro Y
 	yc_alto=19; //33-10-6+2;
-	yc_largo=55-4;
+	
 	yc_ancho=35+8;
 	sep_pol=24; //separación entre ejes de poleas
 	sep_polea=24;
+	yc_largo=sep_pol+10;
 	
 	//altura polea respecto barra superior
 	//pos barra altura-2 del motor
@@ -66,13 +67,14 @@ sep_tensor=18.5-2; //espacio entre el eje del tensor y la barra lisa eje Y
 // Carro Z
 	rfn=true; //¿lleva refuerzo?
 	grm=6; //grosor material refuerzo
-	sep_z=150; //separación entre las esquinas
+	sep_z=150; //separación entre las barras
 	fromw=29.5; //separación barra lisa de la pared
 	cz_fondo=20; //fondo del carro Z
 	cz_alto=50;
 	cz_largo=sep_z+20;
 	 esp=6/2; //la mitad del espesor que queremos en la viga
 	 cur=cz_fondo/2-esp;
+	longZ=310; //longitud del eje Z (esto se ha de poder variar)
 
 // PLEASE SELECT ONE OF THE CONFIGURATIONS BELOW
 // BY UN-COMMENTING IT
