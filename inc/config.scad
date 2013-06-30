@@ -14,16 +14,17 @@ brimw=0; //cuanto brim (5)
 
 // Extremos eje Y
 altura = 20; //original 40
-fondo = 22;
+fondo = 22; //longitud de los soportes de barras
 ancho = 18;
 bajos = 6;
+extra_long=6; //long. extra del soporte barra en el extremo motor
 
 grueso=5;
 
 //Carro Y
 	yc_alto=19; //33-10-6+2;
 	
-	yc_ancho=35+8;
+	yc_ancho=43;
 	sep_pol=24; //separación entre ejes de poleas
 	sep_polea=24;
 	yc_largo=sep_pol+10;

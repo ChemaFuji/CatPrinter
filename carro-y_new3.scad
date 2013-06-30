@@ -13,7 +13,7 @@ impresion=true; //para imprimir las piezas print-frinedly
 module yc_base(){
 	// Bloque principal
 	translate([-yc_alto/2,-yc_ancho+bearing_size/2,0]) 
-	 cube_fillet(size = [yc_alto,yc_ancho-13.5,yc_largo], vertical=[0,0,0,0],top=[0,0,3,0],bottom=[0,0,3,0],center = false);
+	 cube_fillet(size = [yc_alto,yc_ancho,yc_largo], vertical=[0,0,0,0],top=[0,0,3,0],bottom=[0,0,3,0],center = false);
 	
 	if(brimw>0){
 		translate([0,-bearing_size/4,brimh/2])
@@ -24,10 +24,8 @@ module yc_base(){
 	}
 
 	// Bearing holder
-	difference(){
-		translate([0,-bearing_size/4,yc_largo/2])
-		cube_fillet([x_rod_distance+12+diam_x,bearing_size*1.5,yc_largo],center=true);
-	}
+	translate([0,-bearing_size/4,yc_largo/2])
+	cube_fillet([x_rod_distance+12+diam_x,bearing_size*1.5,yc_largo],center=true);
 
 	//refuerzos
 	difference(){
