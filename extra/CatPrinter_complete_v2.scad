@@ -13,6 +13,25 @@ include <../carro-y_new3.scad>
 include <../Z-axis.scad>
 include <../carro-x_new.scad>
 
+//la longitud de las barras del eje X viene dada por el tamaño de los carros Y 
+//(yc_ancho=43 por 2 al ser dos carros) más el largo del carro X (40mm),
+//es algo aproximado ya que los extrusores o soportes de hotend pueden ocupar algo más,
+//más el espacio que se quiera imprimir
+//p. ej. 250mm de impresión sería 86+40+250
+
+longX=86+40+250;
+
+//la longitud de las barras del eje Y viene dada por el área de impresión que 
+// queremos en ese eje que es, para dos extrusores, la separación entre ellos 
+// y el carro X (unos 10mm cada uno, un total de 20mm para CatNozzle)
+// mas el espacio que ocupa el carro Y (24mm = separación entre poleas del carro Y+10)
+// mas el espacio del y_end_idler (22mm = fondo) mas el espacio en el y_end_motor
+// que es fondo+extra_long (22+6 aprox. ya que no llega el carro Y al tope)
+// así será 20+34+22+28+longitud imprimible deseada
+//p. ej. para tener 25cm es 20+34+22+28+250
+
+longY=20+34+22+28+250;
+
 //la longitud del eje Z depende de la altura que se quiera poder imprimir
 //a ésta se le ha de sumar
 //la altura del carro Z (50mm)
@@ -46,17 +65,17 @@ translate([0,0,0]) rotate ([0,180,-90])
 
 zaxis();
 
-translate([93+285-5,-190,-250])
+translate([93+285-5,-longX/2,-longZ])
 rotate([90,90,270])
 ejeY();
 
-translate([93+285-5,190,-250])
+translate([93+285-5,longX/2,-longZ])
 rotate([90,90,270])
 mirror([0,1,0])
 ejeY();
 
 
-translate([352-5,140-100,-250])
+translate([352-5,140-100,-longZ])
 rotate([0,270,90])
 carro_x_montado();
 
@@ -74,7 +93,7 @@ module ejeY(){
 	// poleas
 	translate ([0,-28.5-1,(yc_largo-sep_pol)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
-	translate ([0,-28.5-1,yc_largo-(yc_largo-se_pol)/2]) rotate ([0,-90,0]) 
+	translate ([0,-28.5-1,yc_largo-(yc_largo-sep_pol)/2]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
 		
 	//barras eje X	
