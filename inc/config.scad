@@ -55,7 +55,7 @@ sep_tensor=18.5-2; //espacio entre el eje del tensor y la barra lisa eje Y
 //Carro X
 	xc_largo=40; //largo del carro X
 	//xc_ancho=altura-2+grueso-yc_alto;
-	xc_ancho=sep_pol; //espacio entre ejes poleas en carro Y (==ancho carro X)
+	xc_ancho=sep_pol; //espacio entre ejes poleas en carro Y (==ancho carro X) (24)
 	//fijaciones correa carro X
 	grueso_fijacion=4; //este grueso incluye el grosor de la correa (0.75mm para GT2==belt_grueso)
 	ancho_fijacion=12; //entre centros de los agujeros

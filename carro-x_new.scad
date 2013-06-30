@@ -28,6 +28,8 @@ module carro_x_base(){
 	translate ([-x_rod_distance/2,0,0]) rotate([0,0,180]) 
 	 soporte_bearing(largo=xc_largo,ancho=x_rod_distance/2+1,brimw=brimw,brimh=brimh);	
 
+	//cuerpo propiamente dicho el grueso lo da la separación entre ejes de polea
+	//así el cuerpo tiene un grosor de paredes igual al radio de las poleas (6mm)
 	difference(){
 	union(){
 	translate([0,0,xc_largo/2])

@@ -9,8 +9,6 @@ include <inc/config.scad>
 use <inc/bearing.scad>
 
 impresion=true; //para imprimir las piezas print-frinedly
-yc_largo=34; //debería ser sep_pol+10
-
 
 module yc_base(){
 	// Bloque principal

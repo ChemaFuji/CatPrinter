@@ -47,7 +47,7 @@ module esquinam_holes(){
 
 
   // Hueco para barra lisa
-  #translate([2-3,5.5,altura-2]) rotate([270,0,270]) pushfit_rod(diam_x,100);
+  translate([2-3,5.5,altura-2]) rotate([270,0,270]) pushfit_rod(diam_x,100);
   // Bridas
 	translate([16+3.5,5.5,altura-6.1])
 	rotate([0,90,0])
