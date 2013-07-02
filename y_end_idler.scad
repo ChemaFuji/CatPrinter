@@ -34,7 +34,7 @@ module esquina_holes(){
  screw(r=m3_diameter/2,r2=m3_nut_diameter, slant=false, head_drop=4, h=20, $fn=20,$fnn=6);
 
   // Hueco para barra lisa
-  #translate([2-3,5.5,altura-2+altura_extra]) rotate([270,0,270]) pushfit_rod(diam_x,100);
+  translate([2-3,5.5,altura-2+altura_extra]) rotate([270,0,270]) pushfit_rod(diam_x,100);
 
   // Bridas
 	translate([16,5.5,altura-6.1+altura_extra-2.5])

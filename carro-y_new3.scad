@@ -131,10 +131,10 @@ module yc_plain(){
 }
 
 if(impresion){
-translate([-5,-10,24])
-%cube([10,10,10]);
-translate([-5,-10,0])
-%cube([10,10,10]);
+//translate([-5,-10,24])
+//%cube([10,10,10]);
+//translate([-5,-10,0])
+//%cube([10,10,10]);
 	rotate([0,0,180])
 	yc_plain();
 	//rotate([0,0,180])

@@ -27,10 +27,11 @@ longX=86+40+250;
 // mas el espacio que ocupa el carro Y (24mm = separación entre poleas del carro Y+10)
 // mas el espacio del y_end_idler (22mm = fondo) mas el espacio en el y_end_motor
 // que es fondo+extra_long (22+6 aprox. ya que no llega el carro Y al tope)
+// ********Aqui cuidado con que puede tocar el extrusor con las barras del Z axis!!!! *********
 // así será 20+34+22+28+longitud imprimible deseada
-//p. ej. para tener 25cm es 20+34+22+28+250
+//p. ej. para tener 25cm es 20+34+22+28+250 = 104+250
 
-longY=20+34+22+28+250;
+longY=104+250;
 
 //la longitud del eje Z depende de la altura que se quiera poder imprimir
 //a ésta se le ha de sumar
@@ -43,6 +44,8 @@ longY=20+34+22+28+250;
 longZ=250;
 
 impresion=false;
+
+pos_cx=100; //posición del eje X, sólo visual
 
 //Para exportar a DXF las posiciones de los soportes
 //quitar el doble slash de la linea projection y elegir la posición:
@@ -65,44 +68,46 @@ translate([0,0,0]) rotate ([0,180,-90])
 
 zaxis();
 
-translate([93+285-5,-longX/2,-longZ])
+translate([longY+19,-longX/2+10,-longZ])
 rotate([90,90,270])
-ejeY();
+ejeY(barrax=true);
 
-translate([93+285-5,longX/2,-longZ])
+translate([longY+19,longX/2-10,-longZ])
 rotate([90,90,270])
 mirror([0,1,0])
 ejeY();
 
 
-translate([352-5,140-100,-longZ])
+translate([longY-pos_cx+2,140-100,-longZ])
 rotate([0,270,90])
 carro_x_montado();
 
 }
 
 
-module ejeY(){
+module ejeY(barrax=false){
+	translate([0,0,pos_cx])
 	yc_plain();
 	
 	
 	//barra eje Y
-	#translate([0,0,-60]) cylinder(r=4,h=440);
+	#translate([0,0,21]) cylinder(r=4,h=longY);
 
 	
 	// poleas
-	translate ([0,-28.5-1,(yc_largo-sep_pol)/2]) rotate ([0,-90,0]) 
+	translate ([0,-28.5-1,(yc_largo-sep_pol)/2+pos_cx]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
-	translate ([0,-28.5-1,yc_largo-(yc_largo-sep_pol)/2]) rotate ([0,-90,0]) 
+	translate ([0,-28.5-1,yc_largo-(yc_largo-sep_pol)/2+pos_cx]) rotate ([0,-90,0]) 
 	 polea(diam=12,alto=8);
 		
 	//barras eje X	
-	#translate([x_rod_distance/2,11,yc_largo/2]) rotate ([90,0,0])
-		barrasX(205);
-		
+	if(barrax){
+	#translate([x_rod_distance/2,10,yc_largo/2+pos_cx]) rotate ([90,0,0])
+		barrasX(longX);
+	}
 	
 	// Y_end_motor
-	translate([-altura+2,5.5,115+265-5]) mirror([0,1,0]) rotate([0,90,0]){
+	translate([-altura+2,5.5,longY+21]) mirror([0,1,0]) rotate([0,90,0]){
 	 difference(){
 	  esquinam_base();
 	  esquinam_holes();
@@ -114,10 +119,10 @@ module ejeY(){
 	}
 	
 	//Y_end_idler
-	translate([-24,5.5,-40-20]) rotate ([0,270,180])
+	translate([-24,5.5,21]) rotate ([0,270,180])
 	esquina_holder();
 	
 	//tensor
-	translate([-11.5,-24.5+2,-30-20]) rotate ([0,0,0])
+	translate([-11.5,-24.5+2,21+8]) rotate ([0,0,0])
 	y_tens();
 }
