@@ -71,7 +71,7 @@ module ventila(){
 
 if(impresion){
  ventila();
- translate([0,32,23])
- rotate([75,0,0])
- cylinder(r=3,h=55,$fn=15);
+// translate([0,32,23])
+// rotate([75,0,0])
+// cylinder(r=3,h=55,$fn=15);
 }
