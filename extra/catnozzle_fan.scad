@@ -41,15 +41,16 @@ module ventila_base(){
 }
 
 module pletina(){
-	translate([-ancho_pl/2,22,0]) rotate([90,0,0]){
+	translate([-ancho_pl/2,22,-5]) rotate([90,0,0]){
 	difference(){
-		cube_fillet([ancho_pl,30,3]);
-		translate([(ancho_pl-10)/2,30-18+1,-1])
-		cube_fillet([10,18,5],vertical=[0,0,3,3]);
-		translate([(ancho_pl-4.5)/2+25,30-10+1+1,-1])
+		cube_fillet([ancho_pl,35,3]);
+		translate([(ancho_pl-10)/2,30-18+8,-1])
+		cube_fillet([10,20,5],vertical=[0,0,3,3]);
+		translate([(ancho_pl-4.5)/2+25,30-10+1+5,-1])
 		cube_fillet([4.5,10,5],vertical=[0,0,2,2]);
-		translate([(ancho_pl-4.5)/2-25,30-10+1+1,-1])
+		translate([(ancho_pl-4.5)/2-25,30-10+1+5,-1])
 		cube_fillet([4.5,10,5],vertical=[0,0,2,2]);
+		
 
 	}
 	}
@@ -63,10 +64,14 @@ module ventila(){
 	rotate([90,0,0])
 	cylinder(r=3,h=10,$fn=16);
 	
+	
  }
+	difference(){
 	translate([0,4,6])
 	rotate([-15,0,0])
 	pletina();
+	translate([-50,-50,-10]) cube([100,100,10]);
+	}
 }
 
 if(impresion){
