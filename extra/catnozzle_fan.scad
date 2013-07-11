@@ -30,15 +30,17 @@ giro2=20;
 
 module ventila_base(){
 	difference(){
+		union(){
 		//base fijación ventilador
 		cube_fillet(size=[40,40,3], vertical=[3,3,3,3], top=[0,0,0,0],center=true);
-//		for (i=[-1,1]) { 
-//			for(j=[-1,1]){
-//				translate([i*16,j*16,10]) rotate([180,0,0])
-//					//cylinder(r=m3_diameter/2,h=20,center=true,$fn=8);
-//				 screw(r=m3_diameter/2, r_head=m3_nut_diameter/2,slant=false, head_drop=10, h=50, $fn=10, $fnn=6);
-//			}
-//		}
+		if (brimw>0){
+		translate([0,0,-1.5]){
+		cube_fillet(size=[40+brimw*2,40+brimw*2,brimh], vertical=[3,3,3,3], top=[0,0,0,0],center=true);
+		translate([0,14,0])
+		cube_fillet(size=[40+brimw*4,3.5+brimw*2,brimh], vertical=[3,3,3,3], top=[0,0,0,0],center=true);
+		}
+		}
+		}
 		cylinder(r1=18,r2=16,h=20,center=true);
 	}
 	//cylinder(r=16,h=20,center=true);
@@ -57,7 +59,7 @@ module ventila_base(){
 
 	//primera parte pala interna
 	hull(){
-	translate([0,5,-1.45])
+	translate([0,5,-1.45-0.2])
 	cube([fhole,grosp,0.1],center=true); 
 	translate([0,9-posc/4,-1+posc/pasod])
 	cube([fhole-posc/paso,grosp,0.1],center=true);}
@@ -133,7 +135,15 @@ module pletina(){
 		translate([0,0,posc/pasod+0.05]) translate([0,posh2,0]) rotate([-giro1,0,0])
 		cube_fillet([fhole-grosp-posc/paso,fhole2-grosp,0.01], vertical=curva2,center=true);
 	}
-		
+	
+	translate([55+4,5,-10])
+	rotate([0,0,-30])
+	cube([30,30,30]);
+	mirror([1,0,0])
+	translate([-15+4,5,-10])
+	rotate([0,0,-30])
+	cube([30,30,30]);
+
 
 	}
 	}
@@ -164,13 +174,13 @@ module ventila(){
 		}
 	}
 	
-	translate([25,10,0])
-	rotate([0,30,0])
-	cube([30,30,30]);
-	mirror([1,0,0])
-	translate([25,10,0])
-	rotate([0,30,0])
-	cube([30,30,30]);
+//	translate([25,10,0])
+//	rotate([0,30,0])
+//	cube([30,30,30]);
+//	mirror([1,0,0])
+//	translate([25,10,0])
+//	rotate([0,30,0])
+//	cube([30,30,30]);
 		
 	
  }
@@ -178,7 +188,7 @@ module ventila(){
 
 if(impresion){
  ventila();
- translate([0,32,23])
- rotate([70,0,0])
- cylinder(r=3,h=55,$fn=15);
+// translate([0,32,23])
+// rotate([70,0,0])
+// cylinder(r=3,h=55,$fn=15);
 }

@@ -100,6 +100,6 @@ difference(){
 	}
 }
 
-translate([32+4+3,15,24-2.5+2])
+translate([32+4+3-2,15,24-2.5+2])
 rotate([90+20,0,270])
 ventila();
