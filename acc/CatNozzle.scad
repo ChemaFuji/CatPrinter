@@ -75,13 +75,14 @@ module bloquecal()
 
 bloquecal();
 
-translate([10-2,15,-5]){
+translate([10-2,15,-5-3]){
 difference(){
 color("gainsboro") cylinder(r=3,h=55,$fn=20);
 cylinder(r=1.75,h=56,$fn=20);
 
 }
-cylinder(r=4,h=6,$fn=6);
+translate([0,0,0])
+cylinder(r=4.5,h=8,$fn=6);
 translate([0,0,-3])
 cylinder(r1=1,r2=3.5,h=3,$fn=16);
 
@@ -99,6 +100,6 @@ difference(){
 	}
 }
 
-translate([32+4+3,15,24-2.5])
-rotate([90+15,0,270])
+translate([32+4+3,15,24-2.5+2])
+rotate([90+20,0,270])
 ventila();
